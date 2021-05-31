@@ -76,20 +76,26 @@ export default function MyTabs() {
         activeTintColor: color.primary,
       }}
       barStyle={{backgroundColor: '#fff'}}>
-      <Tab.Screen name="Home" component={HomeStack} 
-      
-      options={{
+      <Tab.Screen
+        name="Home"
+        component={HomeStack}
+        options={{
           tabBarLabel: 'Profile',
-          tabBarIcon: ({ color, size }) => (
+          tabBarIcon: ({color, size}) => (
             <MaterialCommunityIcons name="home" color={color} size={26} />
           ),
-        }} />
-      <Tab.Screen name="File" component={File}  options={{
+        }}
+      />
+      <Tab.Screen
+        name="File"
+        component={File}
+        options={{
           tabBarLabel: 'Profile',
-          tabBarIcon: ({ color, size }) => (
+          tabBarIcon: ({color, size}) => (
             <MaterialCommunityIcons name="bell" color={color} size={26} />
           ),
-        }}   />
+        }}
+      />
     </Tab.Navigator>
   );
 }
