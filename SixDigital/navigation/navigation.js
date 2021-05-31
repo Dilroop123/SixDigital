@@ -5,6 +5,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 // import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 // import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import color from '../style/color';
 import File from '../screens/File/File';
@@ -75,8 +76,20 @@ export default function MyTabs() {
         activeTintColor: color.primary,
       }}
       barStyle={{backgroundColor: '#fff'}}>
-      <Tab.Screen name="Home" component={HomeStack} />
-      <Tab.Screen name="File" component={File} />
+      <Tab.Screen name="Home" component={HomeStack} 
+      
+      options={{
+          tabBarLabel: 'Profile',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="home" color={color} size={26} />
+          ),
+        }} />
+      <Tab.Screen name="File" component={File}  options={{
+          tabBarLabel: 'Profile',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="bell" color={color} size={26} />
+          ),
+        }}   />
     </Tab.Navigator>
   );
 }
