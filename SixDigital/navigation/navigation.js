@@ -67,9 +67,10 @@ export default function MyTabs() {
       labelStyle: {fontSize:14,paddingBottom:5,paddingTop:5},
         activeTintColor: color.blue,
       }}
+
       >
       <Tab.Screen
-        name="Home"
+        name="Homee"
         component={HomeStack}
         options={{
           tabBarLabel: 'Profile',
