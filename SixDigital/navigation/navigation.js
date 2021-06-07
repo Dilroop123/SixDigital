@@ -9,7 +9,7 @@ import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs
 import color from '../style/color';
 import File from '../screens/File/File';
 
-import Updates from '../screens/Home/Updates';
+import Updates from '../screens/Home';
 
 import Detail from '../screens/Detail/Detail';
 import Credentials from '../screens/Credentials';
@@ -49,7 +49,25 @@ export default function MyTabs() {
       tabBarOptions={{
         activeTintColor: color.primary,
       }}
-      barStyle={{backgroundColor: '#fff'}}>
+      barStyle={{backgroundColor: '#fff'}}
+      
+      tabBarOptions={{
+        style: {
+          paddingTop:5,
+          height: '8%',
+          width: '95%',
+          flexDirection: 'column',
+          alignSelf: 'center',
+          elevation: 2,
+          borderTopStartRadius: 10,
+          borderTopEndRadius: 10,
+          marginBottom:'4%',
+          backgroundColor:'#f1f1f2'
+      },
+      labelStyle: {fontSize:14,paddingBottom:5,paddingTop:5},
+        activeTintColor: color.blue,
+      }}
+      >
       <Tab.Screen
         name="Home"
         component={HomeStack}
