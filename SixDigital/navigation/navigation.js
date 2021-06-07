@@ -1,22 +1,51 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
+import {View, Text, Pressable} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import color from '../style/color';
 import File from '../screens/File/File';
 
-import Updates from '../screens/Home';
-
+import Home from '../screens/Home';
+import {SCREEN_WIDTH, SCREEN_HEIGHT} from '../style/fontSize';
 import Detail from '../screens/Detail/Detail';
 import Credentials from '../screens/Credentials';
+import globalStyles from '../style/globalStyles';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 const TabTop = createMaterialTopTabNavigator();
+
+const MARGIN_TOP = SCREEN_HEIGHT * 0.02;
+const ICON_SIZE = SCREEN_HEIGHT * 0.03;
+
+const CustomTabButton = ({children, onPress}) => (
+  <Pressable
+    style={{
+      bottom: SCREEN_HEIGHT * 0.04,
+      justifyContent: 'center',
+      alignItems: 'center',
+      ...globalStyles.shadow,
+    }}
+    onPress={onPress}>
+    <View
+      style={{
+        height: SCREEN_HEIGHT * 0.06,
+        width: SCREEN_HEIGHT * 0.06,
+        borderRadius: SCREEN_HEIGHT * 0.03,
+        backgroundColor: color.primary,
+      }}>
+      {children}
+    </View>
+  </Pressable>
+);
 
 function HomeStack() {
   return (
@@ -28,11 +57,7 @@ function HomeStack() {
           fontSize: 16,
         },
       }}>
-      <Stack.Screen
-        name="MainHome"
-        options={({route}) => ({title: 'Hi ,Welcome Ron'})}
-        component={Updates}
-      />
+      <Stack.Screen name="MainHome" component={Home} />
       <Stack.Screen
         name="Detail"
         options={({route}) => ({title: route.params.screenTitle})}
@@ -47,45 +72,41 @@ export default function MyTabs() {
     <Tab.Navigator
       initialRouteName="Home"
       tabBarOptions={{
-        activeTintColor: color.primary,
-      }}
-      barStyle={{backgroundColor: '#fff'}}
-      
-      tabBarOptions={{
+        showLabel: false,
+        // Floating Tab Bar...
         style: {
-          paddingTop:5,
-          height: '8%',
-          width: '95%',
-          flexDirection: 'column',
-          alignSelf: 'center',
-          elevation: 2,
-          borderTopStartRadius: 10,
-          borderTopEndRadius: 10,
-          marginBottom:'4%',
-          backgroundColor:'#f1f1f2'
-      },
-      labelStyle: {fontSize:14,paddingBottom:5,paddingTop:5},
-        activeTintColor: color.blue,
-      }}
-
-      >
-      <Tab.Screen
-        name="Homee"
-        component={HomeStack}
-        options={{
-          tabBarLabel: 'Profile',
-          tabBarIcon: ({color, size}) => (
-            <MaterialCommunityIcons name="home" color={color} size={26} />
-          ),
-        }}
-      />
+          backgroundColor: color.lightGrey,
+          position: 'absolute',
+          bottom: SCREEN_HEIGHT * 0.02,
+          marginHorizontal: SCREEN_WIDTH * 0.06,
+          // Max Height...
+          height: SCREEN_HEIGHT * 0.09,
+          borderRadius: SCREEN_HEIGHT * 0.02,
+          // Shadow...
+          ...globalStyles.shadow,
+        },
+      }}>
       <Tab.Screen
         name="File"
         component={File}
         options={{
-          tabBarLabel: 'Files',
-          tabBarIcon: ({color, size}) => (
-            <MaterialCommunityIcons name="bell" color={color} size={26} />
+          tabBarIcon: ({focused}) => (
+            <View
+              style={{
+                position: 'absolute',
+                top: MARGIN_TOP,
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <FontAwesome
+                name="file-text-o"
+                color={focused ? color.primary : color.grey}
+                size={ICON_SIZE}
+              />
+              <Text style={{color: focused ? color.primary : color.grey}}>
+                File
+              </Text>
+            </View>
           ),
         }}
       />
@@ -93,9 +114,81 @@ export default function MyTabs() {
         name="Credentials"
         component={Credentials}
         options={{
-          tabBarLabel: 'Credentials',
-          tabBarIcon: ({color, size}) => (
-            <MaterialCommunityIcons name="bell" color={color} size={26} />
+          tabBarIcon: ({focused}) => (
+            <View
+              style={{
+                position: 'absolute',
+                top: MARGIN_TOP,
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <MaterialCommunityIcons
+                name="clipboard-list-outline"
+                color={focused ? color.primary : color.grey}
+                size={ICON_SIZE}
+              />
+              <Text style={{color: focused ? color.primary : color.grey}}>
+                Credentials
+              </Text>
+            </View>
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Home"
+        component={HomeStack}
+        options={{
+          tabBarIcon: ({focused}) => (
+            <AntDesign name="appstore-o" color="white" size={ICON_SIZE} />
+          ),
+          tabBarButton: props => <CustomTabButton {...props} />,
+        }}
+      />
+      <Tab.Screen
+        name="Invoices"
+        component={Credentials}
+        options={{
+          tabBarIcon: ({focused}) => (
+            <View
+              style={{
+                position: 'absolute',
+                top: MARGIN_TOP,
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <FontAwesome5
+                name="file-invoice-dollar"
+                color={focused ? color.primary : color.grey}
+                size={ICON_SIZE}
+              />
+              <Text style={{color: focused ? color.primary : color.grey}}>
+                Invoices
+              </Text>
+            </View>
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="User"
+        component={Credentials}
+        options={{
+          tabBarIcon: ({focused}) => (
+            <View
+              style={{
+                position: 'absolute',
+                top: MARGIN_TOP,
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <FontAwesome
+                name="user-circle-o"
+                color={focused ? color.primary : color.grey}
+                size={ICON_SIZE}
+              />
+              <Text style={{color: focused ? color.primary : color.grey}}>
+                User
+              </Text>
+            </View>
           ),
         }}
       />

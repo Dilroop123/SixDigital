@@ -2,7 +2,7 @@
 import React from 'react';
 import {StyleSheet, View, Text, Dimensions} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import color from '../../style/color';
+import color from '../../../style/color';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 

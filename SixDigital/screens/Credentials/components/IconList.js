@@ -9,7 +9,7 @@ import {
   TouchableWithoutFeedback,
   Dimensions,
 } from 'react-native';
-import color from '../../style/color';
+import color from '../../../style/color';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
@@ -18,47 +18,47 @@ const IconList = ({navigation, route, HeaderComponent, onPress}) => {
     {
       key: '1',
       title: 'Facebook',
-      icon: require('../../assets/facebook.jpg'),
+      icon: require('../../../assets/facebook.jpg'),
     },
     {
       key: '2',
       title: 'Facebook',
-      icon: require('../../assets/facebook.jpg'),
+      icon: require('../../../assets/facebook.jpg'),
     },
     {
       key: '3',
       title: 'Facebook',
-      icon: require('../../assets/facebook.jpg'),
+      icon: require('../../../assets/facebook.jpg'),
     },
     {
       key: '4',
       title: 'Facebook',
-      icon: require('../../assets/facebook.jpg'),
+      icon: require('../../../assets/facebook.jpg'),
     },
     {
       key: '5',
       title: 'Facebook',
-      icon: require('../../assets/facebook.jpg'),
+      icon: require('../../../assets/facebook.jpg'),
     },
     {
       key: '6',
       title: 'Facebook',
-      icon: require('../../assets/facebook.jpg'),
+      icon: require('../../../assets/facebook.jpg'),
     },
     {
       key: '7',
       title: 'Facebook',
-      icon: require('../../assets/facebook.jpg'),
+      icon: require('../../../assets/facebook.jpg'),
     },
     {
       key: '8',
       title: 'Facebook',
-      icon: require('../../assets/facebook.jpg'),
+      icon: require('../../../assets/facebook.jpg'),
     },
     {
       key: '9',
       title: 'creditCard',
-      icon: require('../../assets/facebook.jpg'),
+      icon: require('../../../assets/facebook.jpg'),
     },
   ];
   const renderItems = ({item: icon}) => (

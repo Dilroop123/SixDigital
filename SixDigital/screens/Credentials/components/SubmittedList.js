@@ -11,8 +11,8 @@ import {
   TouchableWithoutFeedback,
   Dimensions,
 } from 'react-native';
-import color from '../../style/color';
-import globalStyles from '../../style/globalStyles';
+import color from '../../../style/color';
+import globalStyles from '../../../style/globalStyles';
 import normalize from 'react-native-normalize';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -53,35 +53,35 @@ const SubmittedList = ({navigation, route, HeaderComponent}) => {
       title: 'xyz password',
       email: 'dilroop@applauz.me',
       password: '123456',
-      icon: require('../../assets/facebook.jpg'),
+      icon: require('../../../assets/facebook.jpg'),
     },
     {
       key: '2',
       title: 'xyz password',
       email: 'dilroop@applauz.me',
       password: '123456',
-      icon: require('../../assets/facebook.jpg'),
+      icon: require('../../../assets/facebook.jpg'),
     },
     {
       key: '3',
       title: 'xyz password',
       email: 'dilroop@applauz.me',
       password: '123456',
-      icon: require('../../assets/facebook.jpg'),
+      icon: require('../../../assets/facebook.jpg'),
     },
     {
       key: '4',
       title: 'xyz password',
       email: 'dilroop@applauz.me',
       password: '123456',
-      icon: require('../../assets/facebook.jpg'),
+      icon: require('../../../assets/facebook.jpg'),
     },
     {
       key: '5',
       title: 'xyz password',
       email: 'dilroop@applauz.me',
       password: '123456',
-      icon: require('../../assets/facebook.jpg'),
+      icon: require('../../../assets/facebook.jpg'),
     },
   ];
   const renderItems = ({item: icon}) => (

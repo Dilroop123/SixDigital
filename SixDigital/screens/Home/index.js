@@ -1,38 +1,38 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import color from '../../style/color';
 
-
-import SearchMenu from './components/SearchMenu';
 import ProffesionalServices from './components/ProffesionalServices';
 import MyProjects from './components/MyProjects';
 import Advertisement from './components/Advertisement';
 
-import {
-  Animated,
-  StyleSheet,
-  View,
-} from 'react-native';
+import {StyleSheet, View} from 'react-native';
+import Header from './components/Header';
+import normalize from 'react-native-normalize';
 
-const Search = () => {
+const Home = () => {
   return (
     <View style={styles.container}>
-      <Animated.ScrollView showsVerticalScrollIndicator={false} style={{ margin:'5%'}} nestedScrollEnabled>
-          <SearchMenu/>
-          <ProffesionalServices/>
-          <MyProjects/>       
-          <Advertisement/>
-     </Animated.ScrollView>
+      <MyProjects
+        headerComponent={
+          <ProffesionalServices
+            footerComponent={
+              <Header leftLabel="My Projects" rightLabel="See all" />
+            }
+          />
+        }
+        footerComponent={<Advertisement />}
+      />
     </View>
   );
 };
 
-export default Search;
+export default Home;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor:color.white,
-    flex:1,
-    flexDirection:'column'
+    backgroundColor: color.white,
+    flex: 1,
+    padding: normalize(24),
   },
-
 });

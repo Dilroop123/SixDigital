@@ -2,13 +2,13 @@
 import React from 'react';
 import {StyleSheet, View, Modal, Text} from 'react-native';
 import normalize from 'react-native-normalize';
-import {HeaderComponent} from './HeaderComponet';
-import IconList from './IconList';
-import SocialMediaModal from './SocialMediaModal';
-import SubmittedList from './SubmittedList';
+import {HeaderComponent} from './components/HeaderComponet';
+import IconList from './components/IconList';
+import SocialMediaModal from './components/SocialMediaModal';
+import SubmittedList from './components/SubmittedList';
 import globalStyles from '../../style/globalStyles';
-import ModalHeader from './ModalHeader';
-import CreditCardModal from './CreditCardModal';
+import ModalHeader from './components/ModalHeader';
+import CreditCardModal from './components/CreditCardModal';
 
 const Credentials = ({navigation}) => {
   const [modalVisible, setModalVisible] = React.useState(false);

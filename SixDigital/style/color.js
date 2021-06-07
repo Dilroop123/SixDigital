@@ -1,16 +1,13 @@
 export default {
-  primary: '#3F2DAF',
-  lightGrey: '#d3d3d3',
-  darkGrey: '#808080',
+  primary: '#3E4095',
+  lightGrey: '#F1F1F2',
+  darkGrey: '#BDBFC1',
   skyBlue: '#87ceeb',
-  
-
-  // lightBlue:'#eef2fa',
-  // primary: '#92EF6D',
-  // purple:'#4e1f9d',
-  // white:"#ffffff",
-  // processText:'#f9b98a',
-  // grey:'#86888a',
-  // WarningText:'#f0585c',
-  // successText:'#00a859'
+  lightBlue: '#EEF2FA',
+  purple: '#4e1f9d',
+  white: '#ffffff',
+  processText: '#f9b98a',
+  grey: '#86888a',
+  WarningText: '#f0585c',
+  successText: '#00a859',
 };

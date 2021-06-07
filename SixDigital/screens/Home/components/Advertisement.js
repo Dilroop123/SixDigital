@@ -1,76 +1,82 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
+import normalize from 'react-native-normalize';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import color from '../../../style/color';
-import {
-  SafeAreaView,
-  ScrollView,
-  Image,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  useColorScheme,
-  View,
-} from 'react-native';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import globalStyles from '../../../style/globalStyles';
 
 const Advertisement = () => {
   return (
-      <View style={styles.container}>
-        <TouchableOpacity>
-          <View style={styles.advertisement} elevation={5}>
-            <View style={{backgroundColor:'#f1f1f2',flex:1.5,paddingRight:'2%',paddingLeft:'2%',paddingTop:'5%',paddingBottom:'8%'}}>
-              <View style={{backgroundColor:'#00afef',width:'20%',borderRadius:3}}>
-                <Text style={{color:color.white,textAlign:'center'}}>Ad</Text>
-              </View>
-              <Text style={styles.adTitle}>Youtube Marketing</Text>
-              <Text style={styles.adDesc}>or camera is one of the best tools for creating videos....</Text>
-            </View>
-            <View style={{marginHorizontal:'3%',flex:1}}>
-              <View style={{backgroundColor:'#00afef',width:'18%',borderRadius:50,marginLeft:'80%',marginVertical:'5%'}}>
-                <Text style={{color:color.white,textAlign:'center',fontSize:18}}>jknknk</Text>
-              </View>
-              <Text style={{color:color.grey, fontSize:24,textAlign:'right'}}>from <Text style={{color:color.purple,fontWeight:'bold'}}>&#x24; 100</Text></Text>
-              <Text style={{color:color.grey, fontSize:14,textAlign:'right'}}>discount <Text style={{color:color.grey,fontWeight:'bold'}}>&#x24; 100</Text></Text>
-            </View>
+    <View style={styles.container}>
+      <TouchableOpacity>
+        <View style={styles.advertisement} elevation={5}>
+          <View
+            style={{
+              backgroundColor: '#f1f1f2',
+              flex: 1.5,
+              padding: 25,
+            }}>
+            <Text style={styles.adTitle}>Youtube Marketing</Text>
+            <Text style={{...styles.adDesc, textAlign: 'center'}}>
+              or camera is one of ....
+            </Text>
           </View>
-        </TouchableOpacity>        
-      </View>
-);
+          <View style={{marginHorizontal: '3%', flex: 1, padding: 25}}>
+            <View
+              style={{
+                backgroundColor: '#00afef',
+                borderRadius: normalize(15),
+                padding: normalize(3),
+                position: 'absolute',
+                right: 0,
+                top: 5,
+                zIndex: 1,
+              }}>
+              <MaterialIcons
+                name="chevron-right"
+                color={color.white}
+                size={20}
+              />
+            </View>
+            <Text style={{color: color.grey, fontSize: 20, textAlign: 'right'}}>
+              from{' '}
+              <Text style={{color: color.primary, fontWeight: 'bold'}}>
+                &#x24; 100
+              </Text>
+            </Text>
+            <Text style={{color: color.grey, fontSize: 14, textAlign: 'right'}}>
+              Discount{' '}
+              <Text style={{color: color.grey, fontWeight: 'bold'}}>
+                &#x24; 100
+              </Text>
+            </Text>
+          </View>
+        </View>
+      </TouchableOpacity>
+    </View>
+  );
 };
 
 export default Advertisement;
 
-
-
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    flexDirection: "column",
-    marginTop:'5%'
+    flexDirection: 'column',
   },
-  advertisement:{
-    marginBottom:'5%',
-    flexDirection:'row',
-    borderRadius:7,
-    backgroundColor:'#fff',
-    shadowColor: "#000000",
-    shadowOpacity: 0.2,
-    shadowRadius: 2,
-    shadowOffset: {
-      height: 1,
-      width: 1
-    }
+  advertisement: {
+    flexDirection: 'row',
+    borderRadius: 7,
+    backgroundColor: '#fff',
+    ...globalStyles.shadow,
   },
-  adTitle:{
-    color:color.purple,
-    fontSize:18,
-    marginLeft:'10%',
-    marginVertical:'5%',
-    fontWeight:'bold',
+  adTitle: {
+    color: color.primary,
+    fontSize: 16,
+    fontWeight: 'bold',
   },
-  adDesc:{
-    color:color.grey,
-    fontSize:14,
-    marginLeft:'10%',
-    textAlign:'justify'
-  }
-
+  adDesc: {
+    color: color.grey,
+    fontSize: 14,
+  },
 });

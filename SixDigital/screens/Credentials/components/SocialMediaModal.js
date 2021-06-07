@@ -1,8 +1,8 @@
 import React from 'react';
 import {StyleSheet, View, Dimensions} from 'react-native';
 import normalize from 'react-native-normalize';
-import Button from '../../components/Button';
-import TextField from '../../components/TextField';
+import Button from '../../../components/Button';
+import TextField from '../../../components/TextField';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 

@@ -2,7 +2,7 @@
 import React from 'react';
 import {Text, View, Dimensions} from 'react-native';
 import normalize from 'react-native-normalize';
-import color from '../../style/color';
+import color from '../../../style/color';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 

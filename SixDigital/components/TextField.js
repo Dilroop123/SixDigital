@@ -1,8 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {Dimensions, TextInput, Text, View} from 'react-native';
-import normalize from 'react-native-normalize';
 import color from '../style/color';
+
+const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 const TextField = ({value, onChangeText, label, flex, style}) => {
   return (
@@ -12,7 +13,7 @@ const TextField = ({value, onChangeText, label, flex, style}) => {
         value={value}
         onChangeText={onChangeText}
         style={{
-          height: 40,
+          height: SCREEN_HEIGHT * 0.05,
           borderRadius: 5,
           borderColor: color.lightGrey,
           borderWidth: 1,
