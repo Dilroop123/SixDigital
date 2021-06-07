@@ -1,8 +1,6 @@
 export default {
-  purple: '#604e9f',
-  blue: '#C9029B',
-  gray: '#D3D3D3',
-  pink: '#e91e63',
-  lightblack: '#7e7e7e',
-  primary: '#92EF6D',
+  primary: '#3F2DAF',
+  lightGrey: '#d3d3d3',
+  darkGrey: '#808080',
+  skyBlue: '#87ceeb',
 };
