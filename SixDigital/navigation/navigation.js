@@ -52,11 +52,7 @@ function HomeStack() {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerTintColor: 'gray',
-        headerTitleAlign: 'center',
-        headerTitleStyle: {
-          fontSize: 16,
-        },
+        headerShown: false,
       }}>
       <Stack.Screen name="MainHome" component={Home} />
       <Stack.Screen

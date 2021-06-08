@@ -15,6 +15,7 @@ import {
 const App = () => {
   return (
     <NavigationContainer>
+      <StatusBar hidden={true} />
       <MyTabs />
     </NavigationContainer>
   );
