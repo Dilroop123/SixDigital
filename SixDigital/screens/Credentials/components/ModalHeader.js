@@ -16,7 +16,7 @@ const ModalHeader = ({title, onpress}) => {
         name="close-circle-outline"
         color={color.primary}
         onPress={onpress}
-        size={25}
+        size={SCREEN_HEIGHT * 0.04}
       />
     </View>
   );

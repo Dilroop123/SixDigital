@@ -13,10 +13,11 @@ const TextField = ({value, onChangeText, label, flex, style}) => {
         value={value}
         onChangeText={onChangeText}
         style={{
-          height: SCREEN_HEIGHT * 0.05,
-          borderRadius: 5,
+          height: SCREEN_HEIGHT * 0.06,
+          borderRadius: SCREEN_HEIGHT * 0.01,
           borderColor: color.lightGrey,
           borderWidth: 1,
+          fontSize: SCREEN_HEIGHT * 0.02,
         }}
         underlineColorAndroid="transparent"
       />

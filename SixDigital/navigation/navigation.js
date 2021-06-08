@@ -2,7 +2,7 @@
 import React from 'react';
 import {View, Text, Pressable} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
-
+import normalize from 'react-native-normalize';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -25,6 +25,7 @@ const TabTop = createMaterialTopTabNavigator();
 
 const MARGIN_TOP = SCREEN_HEIGHT * 0.02;
 const ICON_SIZE = SCREEN_HEIGHT * 0.03;
+const FONT_SIZE = normalize(16);
 
 const CustomTabButton = ({children, onPress}) => (
   <Pressable
@@ -103,7 +104,11 @@ export default function MyTabs() {
                 color={focused ? color.primary : color.grey}
                 size={ICON_SIZE}
               />
-              <Text style={{color: focused ? color.primary : color.grey}}>
+              <Text
+                style={{
+                  color: focused ? color.primary : color.grey,
+                  fontSize: FONT_SIZE,
+                }}>
                 File
               </Text>
             </View>
@@ -127,7 +132,11 @@ export default function MyTabs() {
                 color={focused ? color.primary : color.grey}
                 size={ICON_SIZE}
               />
-              <Text style={{color: focused ? color.primary : color.grey}}>
+              <Text
+                style={{
+                  color: focused ? color.primary : color.grey,
+                  fontSize: FONT_SIZE,
+                }}>
                 Credentials
               </Text>
             </View>
@@ -161,7 +170,11 @@ export default function MyTabs() {
                 color={focused ? color.primary : color.grey}
                 size={ICON_SIZE}
               />
-              <Text style={{color: focused ? color.primary : color.grey}}>
+              <Text
+                style={{
+                  color: focused ? color.primary : color.grey,
+                  fontSize: FONT_SIZE,
+                }}>
                 Invoices
               </Text>
             </View>
@@ -185,7 +198,11 @@ export default function MyTabs() {
                 color={focused ? color.primary : color.grey}
                 size={ICON_SIZE}
               />
-              <Text style={{color: focused ? color.primary : color.grey}}>
+              <Text
+                style={{
+                  color: focused ? color.primary : color.grey,
+                  fontSize: FONT_SIZE,
+                }}>
                 User
               </Text>
             </View>
