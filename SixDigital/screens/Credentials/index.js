@@ -2,7 +2,7 @@
 import React from 'react';
 import {StyleSheet, View, Modal, Text} from 'react-native';
 import normalize from 'react-native-normalize';
-import {Header} from '../../components/Header';
+import {HeaderComponent} from './components/HeaderComponent';
 import IconList from './components/IconList';
 import SocialMediaModal from './components/SocialMediaModal';
 import SubmittedList from './components/SubmittedList';
@@ -55,7 +55,7 @@ const Credentials = ({navigation}) => {
       <SubmittedList
         HeaderComponent={
           <IconList
-            HeaderComponent={Header}
+            HeaderComponent={HeaderComponent}
             onPress={title => onpressHandler(title)}
           />
         }

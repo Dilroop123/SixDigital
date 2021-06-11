@@ -11,17 +11,21 @@ const Header = ({leftLabel, rightLabel, style}) => {
         alignItems: 'center',
         ...style,
       }}>
-      <Text
-        style={{
-          color: color.primary,
-          fontSize: 16,
-          fontWeight: 'bold',
-        }}>
-        {leftLabel}
-      </Text>
-      <TouchableOpacity style={{flexGrow: 1, alignItems: 'flex-end'}}>
-        <Text style={{color: color.grey, fontSize: 14}}>{rightLabel}</Text>
-      </TouchableOpacity>
+      {!!leftLabel && (
+        <Text
+          style={{
+            color: color.primary,
+            fontSize: 16,
+            fontWeight: 'bold',
+          }}>
+          {leftLabel}
+        </Text>
+      )}
+      {!!rightLabel && (
+        <TouchableOpacity style={{flexGrow: 1, alignItems: 'flex-end'}}>
+          <Text style={{color: color.grey, fontSize: 14}}>{rightLabel}</Text>
+        </TouchableOpacity>
+      )}
     </View>
   );
 };

@@ -11,10 +11,10 @@ import {
   TouchableWithoutFeedback,
   Dimensions,
 } from 'react-native';
-import color from '../../../style/color';
+import color from '../../../../style/color';
 import normalize from 'react-native-normalize';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import globalStyles from '../../../style/globalStyles';
+import globalStyles from '../../../../style/globalStyles';
 import StepIndicator from 'react-native-step-indicator';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
@@ -34,10 +34,15 @@ const Label = ({text, value}) => {
   );
 };
 
-const labels = ["Expected Delivery","Delivery Address","Order Summary","Delivered"];
+const labels = [
+  'Expected Delivery',
+  'Delivery Address',
+  'Order Summary',
+  'Delivered',
+];
 const customStyles = {
   stepIndicatorSize: 25,
-  currentStepIndicatorSize:30,
+  currentStepIndicatorSize: 30,
   separatorStrokeWidth: 2,
   currentStepStrokeWidth: 3,
   stepStrokeCurrentColor: '#fe7013',
@@ -56,39 +61,35 @@ const customStyles = {
   stepIndicatorLabelUnFinishedColor: '#aaaaaa',
   labelColor: '#999999',
   labelSize: 13,
-  currentStepLabelColor: '#fe7013'
-}
-
-
+  currentStepLabelColor: '#fe7013',
+};
 
 const TimelinePage = ({navigation, route, HeaderComponent}) => {
-
   const data = [
     {
-      label:'Expected Delivery',
-      status:'',
-      dateTime:'04 June'
+      label: 'Expected Delivery',
+      status: '',
+      dateTime: '04 June',
     },
     {
-      label:'Your delivery date was updated to 2021-06-04',
-      status:'In progress',
-      dateTime:'03 June'
+      label: 'Your delivery date was updated to 2021-06-04',
+      status: 'In progress',
+      dateTime: '03 June',
     },
     {
-      label:'Expected Delivery',
-      status:'',
-      dateTime:'04 June'
+      label: 'Expected Delivery',
+      status: '',
+      dateTime: '04 June',
     },
     {
-      label:'Your delivery date was updated to 2021-06-04',
-      status:'In progress',
-      dateTime:'03 June'
-    }
-
-  ]
+      label: 'Your delivery date was updated to 2021-06-04',
+      status: 'In progress',
+      dateTime: '03 June',
+    },
+  ];
 
   return (
-    <View style={styles.container}>  
+    <View style={styles.container}>
       <View
         style={{
           flexDirection: 'row',
@@ -101,7 +102,7 @@ const TimelinePage = ({navigation, route, HeaderComponent}) => {
         }}>
         <Image
           style={{height: SCREEN_HEIGHT * 0.1, width: SCREEN_HEIGHT * 0.1}}
-          source={require('../../../assets/Fb-ad.jpg')}
+          source={require('../../../../assets/Fb-ad.jpg')}
         />
         <View
           style={{
@@ -111,32 +112,52 @@ const TimelinePage = ({navigation, route, HeaderComponent}) => {
             marginHorizontal: SCREEN_WIDTH * 0.05,
           }}
         />
-        <View style={{flex: 0.8,marginVertical:SCREEN_HEIGHT*0.02}}>
-           <Text style={{color:color.primary,fontSize:14,fontWeight:'bold'}}>Video Shoot</Text>
-           <Text style={{color: color.primary, fontSize: 12, flex: 1, marginVertical:SCREEN_HEIGHT*0.008}}>
+        <View style={{flex: 0.8, marginVertical: SCREEN_HEIGHT * 0.02}}>
+          <Text
+            style={{color: color.primary, fontSize: 14, fontWeight: 'bold'}}>
+            Video Shoot
+          </Text>
+          <Text
+            style={{
+              color: color.primary,
+              fontSize: 12,
+              flex: 1,
+              marginVertical: SCREEN_HEIGHT * 0.008,
+            }}>
             Status : <Text style={{color: color.successText}}>Active</Text>
           </Text>
         </View>
         <View style={{alignItems: 'center', justifyContent: 'center'}}>
-           <Text style={{color: color.primary, fontWeight: 'bold', fontSize:16}}> &#x24; 100</Text>
+          <Text
+            style={{color: color.primary, fontWeight: 'bold', fontSize: 16}}>
+            {' '}
+            &#x24; 100
+          </Text>
         </View>
       </View>
-      <Text style={{color:color.grey,fontSize:12,marginVertical:SCREEN_HEIGHT*0.03}}>Remark Timeline</Text>
+      <Text
+        style={{
+          color: color.grey,
+          fontSize: 12,
+          marginVertical: SCREEN_HEIGHT * 0.03,
+        }}>
+        Remark Timeline
+      </Text>
       <StepIndicator
-          customStyles={customStyles}
-          currentPosition={1}
-          stepCount={4}
-          labels={labels}
-          direction='vertical'
-          renderLabel={({position, stepStatus, label, crntPosition})=>{
-            return(
-              <View>
-                <Text>{data[position].label}</Text>
-                <Text>{data[position].status}</Text>
-                <Text>{data[position].dateTime}</Text>
-              </View>
-            );
-          }}
+        customStyles={customStyles}
+        currentPosition={1}
+        stepCount={4}
+        labels={labels}
+        direction="vertical"
+        renderLabel={({position, stepStatus, label, crntPosition}) => {
+          return (
+            <View>
+              <Text>{data[position].label}</Text>
+              <Text>{data[position].status}</Text>
+              <Text>{data[position].dateTime}</Text>
+            </View>
+          );
+        }}
       />
     </View>
   );
@@ -146,7 +167,7 @@ export default TimelinePage;
 
 const styles = StyleSheet.create({
   container: {
-    flex:1,
-    backgroundColor:color.white
-  }
+    flex: 1,
+    backgroundColor: color.white,
+  },
 });

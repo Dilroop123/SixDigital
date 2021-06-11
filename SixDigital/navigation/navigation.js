@@ -1,6 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {View, Text, Pressable} from 'react-native';
+import globalStyles from '../style/globalStyles';
 import {createStackNavigator} from '@react-navigation/stack';
 import normalize from 'react-native-normalize';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -15,9 +16,10 @@ import File from '../screens/File/File';
 
 import Home from '../screens/Home';
 import {SCREEN_WIDTH, SCREEN_HEIGHT} from '../style/fontSize';
-import Detail from '../screens/Detail/Detail';
 import Credentials from '../screens/Credentials';
-import globalStyles from '../style/globalStyles';
+import Timeline from '../screens/MyProjectDetail/Timeline';
+import Chat from '../screens/MyProjectDetail/Chat';
+import PopularServiceDescription from '../screens/PopularServiceDescription';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -48,6 +50,22 @@ const CustomTabButton = ({children, onPress}) => (
   </Pressable>
 );
 
+function MyProjectDetail() {
+  return (
+    <TabTop.Navigator
+      initialRouteName="Feed"
+      tabBarOptions={{
+        activeTintColor: color.primary,
+        indicatorStyle: {backgroundColor: color.primary},
+        labelStyle: {fontSize: 12},
+        style: {backgroundColor: '#fff'},
+      }}>
+      <TabTop.Screen name="Home" component={Timeline} />
+      <TabTop.Screen name="Chat" component={Chat} />
+    </TabTop.Navigator>
+  );
+}
+
 function HomeStack() {
   return (
     <Stack.Navigator
@@ -55,10 +73,11 @@ function HomeStack() {
         headerShown: false,
       }}>
       <Stack.Screen name="MainHome" component={Home} />
+      <Stack.Screen name="MyProjectDetail" component={MyProjectDetail} />
       <Stack.Screen
-        name="Detail"
+        name="PopularServiceDescription"
         options={({route}) => ({title: route.params.screenTitle})}
-        component={Detail}
+        component={PopularServiceDescription}
       />
     </Stack.Navigator>
   );

@@ -32,35 +32,34 @@ const DATA = [
   },
 ];
 
-const _renderItem = ({item}) => (
-  <Pressable>
-    <View style={styles.proffesion}>
-      <View>
-        <Image style={styles.profImg} source={item.image} />
-      </View>
-      <View style={{marginHorizontal: '3%', flex: 1}}>
-        <Text style={styles.profTitle}>Video Shoot</Text>
-        <Text style={styles.profDesc}>
-          A time-lapse apps or camera is one of the best tools for creating
-          videos...
-        </Text>
-        <View style={{flexDirection: 'row', marginTop: '2%'}}>
-          <Text style={{color: color.purple, fontSize: 14, flex: 1}}>
-            Status : <Text style={{color: color.successText}}>Active</Text>
+const MyProjects = ({headerComponent, footerComponent, onPress}) => {
+  const _renderItem = ({item}) => (
+    <Pressable onPress={() => onPress(item)}>
+      <View style={styles.proffesion}>
+        <View>
+          <Image style={styles.profImg} source={item.image} />
+        </View>
+        <View style={{marginHorizontal: '3%', flex: 1}}>
+          <Text style={styles.profTitle}>Video Shoot</Text>
+          <Text style={styles.profDesc}>
+            A time-lapse apps or camera is one of the best tools for creating
+            videos...
           </Text>
-          <Text style={{color: color.grey, fontSize: 14}}>
-            from{' '}
-            <Text style={{color: color.purple, fontWeight: 'bold'}}>
-              &#x24; 100
+          <View style={{flexDirection: 'row', marginTop: '2%'}}>
+            <Text style={{color: color.purple, fontSize: 14, flex: 1}}>
+              Status : <Text style={{color: color.successText}}>Active</Text>
             </Text>
-          </Text>
+            <Text style={{color: color.grey, fontSize: 14}}>
+              from{' '}
+              <Text style={{color: color.purple, fontWeight: 'bold'}}>
+                &#x24; 100
+              </Text>
+            </Text>
+          </View>
         </View>
       </View>
-    </View>
-  </Pressable>
-);
-
-const MyProjects = ({headerComponent, footerComponent}) => {
+    </Pressable>
+  );
   return (
     <View style={styles.container}>
       <FlatList

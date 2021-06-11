@@ -1,33 +1,30 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {
-  Text,
-  View,
-  Dimensions,
-  TouchableOpacity,
-  StyleSheet,
-} from 'react-native';
-import normalize from 'react-native-normalize';
+import {View, Dimensions, Text, Pressable, StyleSheet} from 'react-native';
+import {SCREEN_HEIGHT, SCREEN_WIDTH} from '../style/fontSize';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import color from '../style/color';
 
-const SCREEN_HEIGHT = Dimensions.get('window').height;
-
-const SCREEN_WIDTH = Dimensions.get('window').width;
-
-export const Header = () => {
+const AppHeader = ({navigation}) => {
   return (
     <View style={styles.headerContainer}>
-      <TouchableOpacity>
+      <Pressable>
         <MaterialIcons name="arrow-back-ios" style={styles.backIcon} />
-      </TouchableOpacity>
-      <View>
-        <Text style={styles.headerTitle}>6 DIGITAL</Text>
-      </View>
+      </Pressable>
+      <Text
+        style={{
+          fontWeight: 'bold',
+          color: color.primary,
+          textAlign: 'center',
+          fontSize: SCREEN_HEIGHT * 0.035,
+        }}>
+        6 DIGITAL
+      </Text>
     </View>
   );
 };
 
+export default AppHeader;
 const styles = StyleSheet.create({
   headerContainer: {
     flexDirection: 'row',
@@ -39,14 +36,5 @@ const styles = StyleSheet.create({
     color: color.primary,
     marginTop: SCREEN_HEIGHT * 0.006,
     width: SCREEN_WIDTH * 0.3,
-  },
-  titleArea: {},
-  headerTitle: {
-    fontWeight: 'bold',
-    color: color.primary,
-    fontSize: 26,
-    flex: 1,
-    paddingRight: 40,
-    textAlign: 'center',
   },
 });

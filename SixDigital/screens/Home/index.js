@@ -8,7 +8,7 @@ import {StyleSheet, View} from 'react-native';
 import Header from './components/Header';
 import {SCREEN_HEIGHT} from '../../style/fontSize';
 
-const Home = () => {
+const Home = ({navigation}) => {
   return (
     <View style={styles.container}>
       <MyProjects
@@ -21,9 +21,19 @@ const Home = () => {
                 style={{marginBottom: SCREEN_HEIGHT * 0.02}}
               />
             }
+            onPress={title =>
+              navigation.navigate('PopularServiceDescription', {
+                title,
+              })
+            }
           />
         }
         footerComponent={<Advertisement />}
+        onPress={product =>
+          navigation.navigate('MyProjectDetail', {
+            product,
+          })
+        }
       />
     </View>
   );

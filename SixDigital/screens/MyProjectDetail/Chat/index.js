@@ -4,17 +4,19 @@ import {
   FlatList,
   StyleSheet,
   View,
+  Text,
   TouchableWithoutFeedback,
 } from 'react-native';
 
-const Detail = ({navigation, route}) => {
-  const {description} = route.params;
-  const {barColor} = route.params;
-
-  return <View style={styles.container}></View>;
+const Chat = ({navigation, route}) => {
+  return (
+    <View style={styles.container}>
+      <Text>Chat screen</Text>
+    </View>
+  );
 };
 
-export default Detail;
+export default Chat;
 
 const styles = StyleSheet.create({
   container: {

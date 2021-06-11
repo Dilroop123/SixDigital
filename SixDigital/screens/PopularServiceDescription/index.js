@@ -2,28 +2,23 @@
 import React from 'react';
 import color from '../../style/color';
 
-import {StyleSheet, View,Text, Modal} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import normalize from 'react-native-normalize';
-import {Header} from '../../components/Header';
+import Header from '../Home/components/Header';
 import DescriptionPage from './components/DescriptionPage';
-import globalStyles from '../../style/globalStyles';
 
-const Description = () => {
-  const [headerTitle, setHeaderTitle] = React.useState();
-
-  const onpressHandler = title => {
-    setHeaderTitle(title);
-  };
+const PopularServiceDescription = ({route}) => {
+  const {title} = route.params;
 
   return (
     <View style={styles.container}>
-      <Header/>
+      <Header leftLabel={title} />
       <DescriptionPage />
     </View>
   );
 };
 
-export default Description;
+export default PopularServiceDescription;
 
 const styles = StyleSheet.create({
   container: {

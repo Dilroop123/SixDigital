@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import color from '../../../style/color';
 import Header from './Header';
-import AppLogo from '../../../components/AppLogo';
+import AppHeader from '../../../components/AppHeader';
 import SearchBar from '../../../components/SearchBar';
 import {SCREEN_HEIGHT, SCREEN_WIDTH} from '../../../style/fontSize';
 const DATA = [
@@ -54,26 +54,25 @@ const DATA = [
   },
 ];
 
-const _renderItem = ({item: service}) => (
-  <Pressable style={styles.services}>
-    <View style={styles.serviceIconArea}>
-      <Image
-        style={{
-          height: SCREEN_HEIGHT * 0.1,
-          width: SCREEN_HEIGHT * 0.1,
-        }}
-        source={require('../../../assets/fbadd.png')}
-      />
-    </View>
+const ProffesionalServices = ({headercomponet, footerComponent, onPress}) => {
+  const _renderItem = ({item: service}) => (
+    <Pressable style={styles.services} onPress={() => onPress(service.title)}>
+      <View style={styles.serviceIconArea}>
+        <Image
+          style={{
+            height: SCREEN_HEIGHT * 0.1,
+            width: SCREEN_HEIGHT * 0.1,
+          }}
+          source={require('../../../assets/fbadd.png')}
+        />
+      </View>
 
-    <Text style={styles.serviceText}>{service.title}</Text>
-  </Pressable>
-);
-
-const ProffesionalServices = ({headercomponet, footerComponent}) => {
+      <Text style={styles.serviceText}>{service.title}</Text>
+    </Pressable>
+  );
   return (
     <View style={styles.container}>
-      <AppLogo />
+      <AppHeader />
 
       <SearchBar style={{marginVertical: SCREEN_HEIGHT * 0.01}} />
       <Header
