@@ -3,7 +3,7 @@ import React from 'react';
 
 import {
   Text,
-  TouchableOpacity,
+  Pressable,
   StyleSheet,
   SafeAreaView,
   Image,
@@ -11,8 +11,10 @@ import {
   FlatList,
 } from 'react-native';
 import color from '../../../style/color';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Header from './Header';
+import AppLogo from '../../../components/AppLogo';
+import SearchBar from '../../../components/SearchBar';
+import {SCREEN_HEIGHT, SCREEN_WIDTH} from '../../../style/fontSize';
 const DATA = [
   {
     id: '1',
@@ -52,21 +54,34 @@ const DATA = [
   },
 ];
 
-const _renderItem = ({item}) => (
-  <View style={styles.services}>
-    <TouchableOpacity>
-      <View style={styles.serviceIconArea}>
-        <FontAwesome name="photo" color={color.purple} size={56} />
-      </View>
-    </TouchableOpacity>
-    <Text style={styles.serviceText}>{item.title}</Text>
-  </View>
+const _renderItem = ({item: service}) => (
+  <Pressable style={styles.services}>
+    <View style={styles.serviceIconArea}>
+      <Image
+        style={{
+          height: SCREEN_HEIGHT * 0.1,
+          width: SCREEN_HEIGHT * 0.1,
+        }}
+        source={require('../../../assets/fbadd.png')}
+      />
+    </View>
+
+    <Text style={styles.serviceText}>{service.title}</Text>
+  </Pressable>
 );
 
 const ProffesionalServices = ({headercomponet, footerComponent}) => {
   return (
     <View style={styles.container}>
-      <Header leftLabel=" Popular Proffesional Services" rightLabel="See all" />
+      <AppLogo />
+
+      <SearchBar style={{marginVertical: SCREEN_HEIGHT * 0.01}} />
+      <Header
+        leftLabel=" Popular Proffesional Services"
+        rightLabel="See all"
+        style={{marginVertical: SCREEN_HEIGHT * 0.02}}
+      />
+
       <View>
         <FlatList
           data={DATA}
@@ -84,41 +99,18 @@ const ProffesionalServices = ({headercomponet, footerComponent}) => {
 export default ProffesionalServices;
 
 const styles = StyleSheet.create({
-  list: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-  },
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    marginTop: '5%',
-  },
-  logoText: {
-    color: color.purple,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    fontSize: 40,
-  },
-  mainServiceContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    flex: 1,
-    marginBottom: '10%',
-  },
   services: {
-    backgroundColor: '#eef2fa',
-    borderRadius: 7,
-    padding: '3%',
+    backgroundColor: color.lightBlue,
+    borderRadius: SCREEN_HEIGHT * 0.01,
+    padding: SCREEN_WIDTH * 0.02,
     flex: 1,
-    marginHorizontal: 5,
-    marginBottom: 20,
+    marginHorizontal: SCREEN_WIDTH * 0.02,
+    marginBottom: SCREEN_HEIGHT * 0.02,
   },
   serviceIconArea: {
     backgroundColor: color.white,
-    borderRadius: 7,
-    height: 100,
+    borderRadius: SCREEN_HEIGHT * 0.01,
     alignItems: 'center',
-    paddingTop: '20%',
   },
   serviceText: {
     textAlign: 'center',

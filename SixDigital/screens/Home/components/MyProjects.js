@@ -8,49 +8,43 @@ import {
   View,
   Image,
   FlatList,
-  SafeAreaView,
 } from 'react-native';
-import Header from './Header';
+import {Pressable} from 'react-native';
+import globalStyles from '../../../style/globalStyles';
+import {SCREEN_HEIGHT, SCREEN_WIDTH} from '../../../style/fontSize';
+import normalize from 'react-native-normalize';
 
 const DATA = [
   {
     key: '1',
     title: 'RUSTY DRIVE',
-    image:
-      'https://res.cloudinary.com/demo/image/upload/w_260,h_200,c_crop,g_north/sample.jpg',
+    image: require('../../../assets/myproject.png'),
   },
   {
     key: '2',
     title: 'SABOR MORENO',
-    image:
-      'https://res.cloudinary.com/demo/image/upload/w_260,h_200,c_crop,g_north/sample.jpg',
+    image: require('../../../assets/myproject.png'),
   },
   {
     key: '3',
     title: '0 MESTRE PUB',
-    image:
-      'https://res.cloudinary.com/demo/image/upload/w_260,h_200,c_crop,g_north/sample.jpg',
+    image: require('../../../assets/myproject.png'),
   },
 ];
 
 const _renderItem = ({item}) => (
-  <TouchableOpacity>
-    <View style={styles.proffesion} elevation={5}>
+  <Pressable>
+    <View style={styles.proffesion}>
       <View>
-        <Image
-          style={styles.profImg}
-          source={{
-            uri: 'https://www.ajactraining.org/wp-content/uploads/2019/09/image-placeholder.jpg',
-          }}
-        />
+        <Image style={styles.profImg} source={item.image} />
       </View>
       <View style={{marginHorizontal: '3%', flex: 1}}>
         <Text style={styles.profTitle}>Video Shoot</Text>
         <Text style={styles.profDesc}>
           A time-lapse apps or camera is one of the best tools for creating
-          videos.....
+          videos...
         </Text>
-        <View style={{flexDirection: 'row', marginTop: '4%'}}>
+        <View style={{flexDirection: 'row', marginTop: '2%'}}>
           <Text style={{color: color.purple, fontSize: 14, flex: 1}}>
             Status : <Text style={{color: color.successText}}>Active</Text>
           </Text>
@@ -63,7 +57,7 @@ const _renderItem = ({item}) => (
         </View>
       </View>
     </View>
-  </TouchableOpacity>
+  </Pressable>
 );
 
 const MyProjects = ({headerComponent, footerComponent}) => {
@@ -97,32 +91,26 @@ const styles = StyleSheet.create({
   },
 
   proffesion: {
-    marginBottom: '5%',
+    marginBottom: SCREEN_HEIGHT * 0.02,
     flexDirection: 'row',
-    padding: 10,
+    padding: SCREEN_HEIGHT * 0.01,
+    borderRadius: SCREEN_HEIGHT * 0.02,
     backgroundColor: '#fff',
-    shadowColor: '#000000',
-    shadowOpacity: 0.2,
-    borderRadius: 7,
-    shadowRadius: 2,
-    shadowOffset: {
-      height: 1,
-      width: 1,
-    },
+    ...globalStyles.shadow,
   },
   profImg: {
-    height: 110,
-    width: 130,
-    borderRadius: 5,
+    height: SCREEN_HEIGHT * 0.1,
+    width: SCREEN_HEIGHT * 0.12,
+    borderRadius: normalize(5),
   },
   profTitle: {
-    color: color.purple,
+    color: color.primary,
     fontSize: 16,
     fontWeight: 'bold',
   },
   profDesc: {
     color: color.grey,
-    marginTop: '5%',
+    marginTop: '2%',
     fontSize: 14,
     textAlign: 'justify',
   },

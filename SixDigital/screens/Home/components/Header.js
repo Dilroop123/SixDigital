@@ -3,17 +3,17 @@ import React from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 import color from '../../../style/color';
 
-const Header = ({leftLabel, rightLabel}) => {
+const Header = ({leftLabel, rightLabel, style}) => {
   return (
     <View
       style={{
         flexDirection: 'row',
-        marginBottom: '5%',
         alignItems: 'center',
+        ...style,
       }}>
       <Text
         style={{
-          color: color.purple,
+          color: color.primary,
           fontSize: 16,
           fontWeight: 'bold',
         }}>
