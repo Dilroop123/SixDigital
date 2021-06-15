@@ -84,10 +84,7 @@ function HomeStack() {
   );
 }
 
-
-
-
- function MyTabs() {
+function MyTabs() {
   return (
     <Tab.Navigator
       initialRouteName="Home"
@@ -238,9 +235,8 @@ export default function MianStack() {
       screenOptions={{
         headerShown: false,
       }}>
-      <Stack.Screen name="Splash" component={Splash} />
+      {/* <Stack.Screen name="Splash" component={Splash} /> */}
       <Stack.Screen name="MyTabs" component={MyTabs} />
-   
     </Stack.Navigator>
   );
 }
