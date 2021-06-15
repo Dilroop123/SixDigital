@@ -1,6 +1,6 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import MyTabs from './navigation/navigation';
+import MianStack from './navigation/navigation';
 
 import {
   SafeAreaView,
@@ -16,7 +16,7 @@ const App = () => {
   return (
     <NavigationContainer>
       <StatusBar hidden={true} />
-      <MyTabs />
+      <MianStack />
     </NavigationContainer>
   );
 };

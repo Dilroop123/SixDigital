@@ -20,6 +20,7 @@ import Credentials from '../screens/Credentials';
 import Timeline from '../screens/MyProjectDetail/Timeline';
 import Chat from '../screens/MyProjectDetail/Chat';
 import PopularServiceDescription from '../screens/PopularServiceDescription';
+import Splash from '../screens/Splash';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -83,7 +84,10 @@ function HomeStack() {
   );
 }
 
-export default function MyTabs() {
+
+
+
+ function MyTabs() {
   return (
     <Tab.Navigator
       initialRouteName="Home"
@@ -225,5 +229,18 @@ export default function MyTabs() {
         }}
       />
     </Tab.Navigator>
+  );
+}
+
+export default function MianStack() {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}>
+      <Stack.Screen name="Splash" component={Splash} />
+      <Stack.Screen name="MyTabs" component={MyTabs} />
+   
+    </Stack.Navigator>
   );
 }

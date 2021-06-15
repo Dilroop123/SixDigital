@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, { useState } from 'react';
 
 import {
   Button,
@@ -34,34 +34,29 @@ const Label = ({text, value}) => {
   );
 };
 
-const labels = [
-  'Expected Delivery',
-  'Delivery Address',
-  'Order Summary',
-  'Delivered',
-];
+
 const customStyles = {
   stepIndicatorSize: 25,
   currentStepIndicatorSize: 30,
   separatorStrokeWidth: 2,
   currentStepStrokeWidth: 3,
-  stepStrokeCurrentColor: '#fe7013',
-  stepStrokeWidth: 3,
+  stepStrokeCurrentColor: color.orange,
+  stepStrokeWidth: 2,
   stepStrokeFinishedColor: color.successText,
-  stepStrokeUnFinishedColor: '#aaaaaa',
-  separatorFinishedColor: '#fe7013',
-  separatorUnFinishedColor: '#aaaaaa',
+  stepStrokeUnFinishedColor: color.lightGrey,
+  separatorFinishedColor: color.lightGrey,
+  separatorUnFinishedColor: color.lightGrey,
   stepIndicatorFinishedColor: color.successText,
-  stepIndicatorUnFinishedColor: '#ffffff',
-  stepIndicatorCurrentColor: '#ffffff',
+  stepIndicatorUnFinishedColor: color.white,
+  stepIndicatorCurrentColor: color.white,
   stepIndicatorLabelFontSize: 13,
   currentStepIndicatorLabelFontSize: 13,
-  stepIndicatorLabelCurrentColor: '#fe7013',
-  stepIndicatorLabelFinishedColor: '#ffffff',
-  stepIndicatorLabelUnFinishedColor: '#aaaaaa',
-  labelColor: '#999999',
+  stepIndicatorLabelCurrentColor: color.orange,
+  stepIndicatorLabelFinishedColor: color.white,
+  stepIndicatorLabelUnFinishedColor:color.lightGrey,
+  labelColor: color.grey,
   labelSize: 13,
-  currentStepLabelColor: '#fe7013',
+  currentStepLabelColor: color.orange,
 };
 
 const TimelinePage = ({navigation, route, HeaderComponent}) => {
@@ -87,6 +82,8 @@ const TimelinePage = ({navigation, route, HeaderComponent}) => {
       dateTime: '03 June',
     },
   ];
+
+  const [currentPosition, setCurrentPosition] = useState(1);
 
   return (
     <View style={styles.container}>
@@ -135,30 +132,33 @@ const TimelinePage = ({navigation, route, HeaderComponent}) => {
           </Text>
         </View>
       </View>
-      <Text
-        style={{
-          color: color.grey,
-          fontSize: 12,
-          marginVertical: SCREEN_HEIGHT * 0.03,
-        }}>
-        Remark Timeline
-      </Text>
-      <StepIndicator
-        customStyles={customStyles}
-        currentPosition={1}
-        stepCount={4}
-        labels={labels}
-        direction="vertical"
-        renderLabel={({position, stepStatus, label, crntPosition}) => {
-          return (
-            <View>
-              <Text>{data[position].label}</Text>
-              <Text>{data[position].status}</Text>
-              <Text>{data[position].dateTime}</Text>
-            </View>
-          );
-        }}
-      />
+      <View style={styles.indicatorContainer}>
+        <Text
+          style={{
+            color: color.grey,
+            fontSize: 12,
+            marginVertical: SCREEN_HEIGHT * 0.03,
+          }}>
+          Remark Timeline
+        </Text>
+        <StepIndicator
+          customStyles={customStyles}
+          currentPosition={currentPosition}
+          stepCount={4}
+          labels={data}
+          direction="vertical"
+          renderLabel={({position, stepStatus, label, crntPosition}) => {
+            return (
+              <View style={styles.lblContainer}>
+                <Text style={styles.lblStatus}>{data[position].label}</Text>
+                <Text style={styles.lblStatus}>{data[position].status}</Text>
+                <Text style={styles.lblText}>{data[position].dateTime}</Text>
+              </View>
+            );
+          }}
+        />
+      </View>
+      
     </View>
   );
 };
@@ -170,4 +170,22 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: color.white,
   },
+  indicatorContainer: {
+    height:SCREEN_HEIGHT * 0.58,
+    width: SCREEN_WIDTH * 0.7,
+    padding: SCREEN_HEIGHT * 0.005,
+    margin:SCREEN_HEIGHT * 0.02
+  },
+  lblContainer :{
+    marginTop:0,
+    paddingLeft: SCREEN_WIDTH * 0.002,
+    width: SCREEN_WIDTH * 0.6
+  },
+  lblStatus :{
+
+  },
+  lblText : {
+    fontSize: 14,
+    fontWeight:'bold'
+  }
 });
