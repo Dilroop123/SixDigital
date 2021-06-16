@@ -11,20 +11,16 @@ import {
 } from 'react-native';
 import color from '../../style/color';
 
-const Splash = ({navigation}) => {
-
-    setTimeout(() => {
-        navigation.navigate('SignUp')
-    }, 1000);
+const ForgotPassword = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.splashTxt}>6 DIGITAL</Text>
+      <Text style={styles.splashTxt}>forgot password</Text>
     </View>
   );
 };
 
-export default Splash
+export default ForgotPassword;
 
 const styles = StyleSheet.create({
     container: {

@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
   backIcon: {
     fontSize: 26,
     color: color.primary,
+    marginHorizontal:SCREEN_WIDTH * 0.03,
     marginTop: SCREEN_HEIGHT * 0.006,
     width: SCREEN_WIDTH * 0.3,
   },

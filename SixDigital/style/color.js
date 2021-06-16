@@ -10,5 +10,6 @@ export default {
   grey: '#86888a',
   WarningText: '#f0585c',
   successText: '#00a859',
-  orange:'#fe7013'
+  orange:'#fe7013',
+  red:'#f44336'
 };
