@@ -15,59 +15,26 @@ import Header from './Header';
 import AppHeader from '../../../components/AppHeader';
 import SearchBar from '../../../components/SearchBar';
 import {SCREEN_HEIGHT, SCREEN_WIDTH} from '../../../style/fontSize';
-const DATA = [
-  {
-    id: '1',
-    title: 'RUSTY DRIVE',
-    image:
-      'https://res.cloudinary.com/demo/image/upload/w_260,h_200,c_crop,g_north/sample.jpg',
-  },
-  {
-    id: '2',
-    title: 'SABOR MORENO',
-    image:
-      'https://res.cloudinary.com/demo/image/upload/w_260,h_200,c_crop,g_north/sample.jpg',
-  },
-  {
-    id: '3',
-    title: '0 MESTRE PUB',
-    image:
-      'https://res.cloudinary.com/demo/image/upload/w_260,h_200,c_crop,g_north/sample.jpg',
-  },
-  {
-    id: '4',
-    title: 'GRILL 54 CHEF',
-    image:
-      'https://res.cloudinary.com/demo/image/upload/w_260,h_200,c_crop,g_north/sample.jpg',
-  },
-  {
-    id: '5',
-    title: 'RUSTY DRIVE',
-    image:
-      'https://res.cloudinary.com/demo/image/upload/w_260,h_200,c_crop,g_north/sample.jpg',
-  },
-  {
-    id: '6',
-    title: 'SABOR MORENO',
-    image:
-      'https://res.cloudinary.com/demo/image/upload/w_260,h_200,c_crop,g_north/sample.jpg',
-  },
-];
 
-const ProffesionalServices = ({headercomponet, footerComponent, onPress}) => {
+const ProffesionalServices = ({
+  headercomponet,
+  footerComponent,
+  ProffesionalServicesData,
+  onPress,
+}) => {
   const _renderItem = ({item: service}) => (
-    <Pressable style={styles.services} onPress={() => onPress(service.title)}>
+    <Pressable style={styles.services} onPress={() => onPress(service.name)}>
       <View style={styles.serviceIconArea}>
         <Image
           style={{
             height: SCREEN_HEIGHT * 0.1,
             width: SCREEN_HEIGHT * 0.1,
           }}
-          source={require('../../../assets/fbadd.png')}
+          source={{uri: service?.image?.publicUrl}}
         />
       </View>
 
-      <Text style={styles.serviceText}>{service.title}</Text>
+      <Text style={styles.serviceText}>{service.name}</Text>
     </Pressable>
   );
   return (
@@ -83,7 +50,7 @@ const ProffesionalServices = ({headercomponet, footerComponent, onPress}) => {
 
       <View>
         <FlatList
-          data={DATA}
+          data={ProffesionalServicesData}
           renderItem={_renderItem}
           keyExtractor={item => item.id}
           numColumns={3}

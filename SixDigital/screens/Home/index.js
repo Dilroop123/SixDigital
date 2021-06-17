@@ -1,6 +1,8 @@
 import React from 'react';
 import normalize from 'react-native-normalize';
+import {useSelector, useDispatch} from 'react-redux';
 import color from '../../style/color';
+import * as HomeAction from '../../store/actions/HomeAction';
 import ProffesionalServices from './components/ProffesionalServices';
 import MyProjects from './components/MyProjects';
 import Advertisement from './components/Advertisement';
@@ -9,11 +11,27 @@ import Header from './components/Header';
 import {SCREEN_HEIGHT} from '../../style/fontSize';
 
 const Home = ({navigation}) => {
+  const dispatch = useDispatch();
+  const homeData = useSelector(state => state.home.HomeData);
+
+  const [loader, setLoader] = React.useState(false);
+
+  React.useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      //  setLoader(true);  check in voozoo
+
+      dispatch(HomeAction.fetchHomeData('60caaf095abd5c7cc4735ee9'));
+
+      setLoader(false);
+    });
+  }, [dispatch, navigation]);
+
   return (
     <View style={styles.container}>
       <MyProjects
         headerComponent={
           <ProffesionalServices
+            ProffesionalServicesData={homeData?.services}
             footerComponent={
               <Header
                 leftLabel="My Projects"

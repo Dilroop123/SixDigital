@@ -1,21 +1,12 @@
 import React from 'react';
 
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import color from '../../style/color';
 
 const Splash = ({navigation}) => {
-
-    setTimeout(() => {
-        navigation.navigate('SignUp')
-    }, 1000);
+  setTimeout(() => {
+    navigation.navigate('Login');
+  }, 1000);
 
   return (
     <View style={styles.container}>
@@ -24,19 +15,18 @@ const Splash = ({navigation}) => {
   );
 };
 
-export default Splash
+export default Splash;
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: color.purple,
-      alignItems:'center',
-      justifyContent:'center'
-    },
-    splashTxt:{
-        color:color.white,
-        fontWeight:'bold',
-        fontSize:40
-    }
-  });
-  ;
+  container: {
+    flex: 1,
+    backgroundColor: color.purple,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  splashTxt: {
+    color: color.white,
+    fontWeight: 'bold',
+    fontSize: 40,
+  },
+});

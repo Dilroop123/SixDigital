@@ -5,11 +5,19 @@ import color from '../style/color';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
-const TextField = ({value, onChangeText, label, flex, style}) => {
+const TextField = ({
+  value,
+  onChangeText,
+  label,
+  flex,
+  style,
+  secureTextEntry,
+}) => {
   return (
     <View style={{flex: flex, ...style}}>
       <Text style={{color: color.primary}}>{label}</Text>
       <TextInput
+        secureTextEntry={secureTextEntry}
         value={value}
         onChangeText={onChangeText}
         style={{

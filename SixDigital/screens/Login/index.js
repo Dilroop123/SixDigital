@@ -1,9 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
-/* eslint-disable prettier/prettier */
 import React from 'react';
 
 import {
-  SafeAreaView,
   Dimensions,
   TouchableWithoutFeedback,
   ScrollView,
@@ -11,19 +9,32 @@ import {
   StyleSheet,
   Image,
   Button,
-  TextInput,
   Text,
-  useColorScheme,
   View,
 } from 'react-native';
-// import Button from '../../components/Button';
+import {useDispatch, useSelector} from 'react-redux';
 import TextField from '../../components/TextField';
+import * as UserActions from '../../store/actions/UserActions';
 import color from '../../style/color';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 const Login = ({navigation}) => {
-  const [value, setValue] = React.useState('');
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+
+  const userData = useSelector(state => state.user.UserData);
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    if (userData?.data?.email) {
+      navigation.replace('HomeScreen');
+    }
+  }, [userData, navigation]);
+
+  const onPressHandler = () => {
+    dispatch(UserActions.loginUser(email, password));
+  };
 
   return (
     <View style={styles.container}>
@@ -58,8 +69,8 @@ const Login = ({navigation}) => {
             </View>
             <View style={{marginVertical: SCREEN_HEIGHT * 0.03}}>
               <TextField
-                value={value}
-                onChangeText={setValue}
+                value={email}
+                onChangeText={setEmail}
                 label="Email"
                 keyboardType="email-address"
                 flex={1}
@@ -67,11 +78,11 @@ const Login = ({navigation}) => {
             </View>
             <View>
               <TextField
-                value={value}
-                onChangeText={setValue}
+                value={password}
+                onChangeText={setPassword}
                 label="Password"
                 keyboardType="password"
-                secureTextEntry={true}
+                secureTextEntry
                 flex={1}
               />
             </View>
@@ -87,7 +98,11 @@ const Login = ({navigation}) => {
               </TouchableWithoutFeedback>
             </View>
             <View style={{marginVertical: SCREEN_HEIGHT * 0.03}}>
-              <Button title="Log In" color={color.primary} onPress={() => {}} />
+              <Button
+                title="Log In"
+                color={color.primary}
+                onPress={onPressHandler}
+              />
             </View>
             <View>
               <Text style={{flex: 1, textAlign: 'center'}}>

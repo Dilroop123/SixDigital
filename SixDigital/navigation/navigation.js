@@ -13,7 +13,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import color from '../style/color';
 import File from '../screens/File/File';
-
+import Login from '../screens/Login';
 import Home from '../screens/Home';
 import {SCREEN_WIDTH, SCREEN_HEIGHT} from '../style/fontSize';
 import Credentials from '../screens/Credentials';
@@ -21,6 +21,8 @@ import Timeline from '../screens/MyProjectDetail/Timeline';
 import Chat from '../screens/MyProjectDetail/Chat';
 import PopularServiceDescription from '../screens/PopularServiceDescription';
 import Splash from '../screens/Splash';
+
+import SignUp from '../screens/SignUp/index';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -235,8 +237,10 @@ export default function MianStack() {
       screenOptions={{
         headerShown: false,
       }}>
-      {/* <Stack.Screen name="Splash" component={Splash} /> */}
-      <Stack.Screen name="MyTabs" component={MyTabs} />
+      {/* <Stack.Screen name="Splash" component={Splash} />
+      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="SignUp" component={SignUp} /> */}
+      <Stack.Screen name="HomeScreen" component={MyTabs} />
     </Stack.Navigator>
   );
 }
