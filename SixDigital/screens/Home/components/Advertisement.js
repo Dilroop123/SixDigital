@@ -9,28 +9,7 @@ import {FlatList} from 'react-native';
 import {Pressable} from 'react-native';
 import {SCREEN_WIDTH, SCREEN_HEIGHT} from '../../../style/fontSize';
 
-const Advertisement = () => {
-  const DATA = [
-    {
-      id: '1',
-      title: 'RUSTY DRIVE',
-      image:
-        'https://res.cloudinary.com/demo/image/upload/w_260,h_200,c_crop,g_north/sample.jpg',
-    },
-    {
-      id: '2',
-      title: 'SABOR MORENO',
-      image:
-        'https://res.cloudinary.com/demo/image/upload/w_260,h_200,c_crop,g_north/sample.jpg',
-    },
-    {
-      id: '3',
-      title: '0 MESTRE PUB',
-      image:
-        'https://res.cloudinary.com/demo/image/upload/w_260,h_200,c_crop,g_north/sample.jpg',
-    },
-  ];
-
+const Advertisement = ({advertisementData}) => {
   const _renderItem = ({item: service}) => (
     <Pressable
       style={{
@@ -44,9 +23,9 @@ const Advertisement = () => {
             flex: 1.5,
             padding: SCREEN_WIDTH * 0.06,
           }}>
-          <Text style={styles.adTitle}>Youtube Marketing</Text>
+          <Text style={styles.adTitle}>{service?.title}</Text>
           <Text style={{...styles.adDesc, textAlign: 'center'}}>
-            or camera is one of ....
+            {service?.description}
           </Text>
         </View>
         <View
@@ -67,16 +46,31 @@ const Advertisement = () => {
             }}>
             <MaterialIcons name="chevron-right" color={color.white} size={15} />
           </View>
-          <Text style={{color: color.grey, fontSize: 20, textAlign: 'right'}}>
-            from{' '}
+          <Text
+            style={{
+              color: color.grey,
+              fontSize: SCREEN_HEIGHT * 0.022,
+              textAlign: 'right',
+            }}>
+            Now{' '}
             <Text style={{color: color.primary, fontWeight: 'bold'}}>
-              &#x24; 100
+              &#x24; {service?.real_cost}
             </Text>
           </Text>
-          <Text style={{color: color.grey, fontSize: 14, textAlign: 'right'}}>
-            Discount{' '}
-            <Text style={{color: color.grey, fontWeight: 'bold'}}>
-              &#x24; 100
+          <Text
+            style={{
+              color: color.grey,
+              fontSize: SCREEN_HEIGHT * 0.019,
+              textAlign: 'right',
+            }}>
+            Before{' '}
+            <Text
+              style={{
+                color: color.grey,
+                fontWeight: 'bold',
+                textDecorationLine: 'line-through',
+              }}>
+              &#x24; {service?.actual_cost}
             </Text>
           </Text>
         </View>
@@ -86,9 +80,9 @@ const Advertisement = () => {
   return (
     <View style={styles.container}>
       <FlatList
-        data={DATA}
+        data={advertisementData}
         renderItem={_renderItem}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item._id}
       />
     </View>
   );
@@ -114,5 +108,6 @@ const styles = StyleSheet.create({
   adDesc: {
     color: color.grey,
     fontSize: 14,
+    height: SCREEN_HEIGHT * 0.02,
   },
 });

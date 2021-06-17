@@ -14,36 +14,25 @@ import globalStyles from '../../../style/globalStyles';
 import {SCREEN_HEIGHT, SCREEN_WIDTH} from '../../../style/fontSize';
 import normalize from 'react-native-normalize';
 
-const DATA = [
-  {
-    key: '1',
-    title: 'RUSTY DRIVE',
-    image: require('../../../assets/myproject.png'),
-  },
-  {
-    key: '2',
-    title: 'SABOR MORENO',
-    image: require('../../../assets/myproject.png'),
-  },
-  {
-    key: '3',
-    title: '0 MESTRE PUB',
-    image: require('../../../assets/myproject.png'),
-  },
-];
-
-const MyProjects = ({headerComponent, footerComponent, onPress}) => {
-  const _renderItem = ({item}) => (
-    <Pressable onPress={() => onPress(item)}>
+const MyProjects = ({
+  headerComponent,
+  footerComponent,
+  myProjectsData,
+  onPress,
+}) => {
+  const _renderItem = ({item: project}) => (
+    <Pressable onPress={() => onPress(project)}>
       <View style={styles.proffesion}>
         <View>
-          <Image style={styles.profImg} source={item.image} />
+          <Image
+            style={styles.profImg}
+            source={{uri: project?.image?.publicUrl}}
+          />
         </View>
         <View style={{marginHorizontal: '3%', flex: 1}}>
-          <Text style={styles.profTitle}>Video Shoot</Text>
+          <Text style={styles.profTitle}>{project?.name}</Text>
           <Text style={styles.profDesc}>
-            A time-lapse apps or camera is one of the best tools for creating
-            videos...
+            {project?.timeline[project?.timeline.length - 1]?.description}
           </Text>
           <View style={{flexDirection: 'row', marginTop: '2%'}}>
             <Text style={{color: color.purple, fontSize: 14, flex: 1}}>
@@ -63,9 +52,9 @@ const MyProjects = ({headerComponent, footerComponent, onPress}) => {
   return (
     <View style={styles.container}>
       <FlatList
-        data={DATA}
+        data={myProjectsData}
         renderItem={_renderItem}
-        keyExtractor={item => item.key}
+        keyExtractor={item => item._id}
         ListHeaderComponent={headerComponent}
         ListFooterComponent={footerComponent}
         showsVerticalScrollIndicator={false}

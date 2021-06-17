@@ -20,7 +20,7 @@ const Home = ({navigation}) => {
     const unsubscribe = navigation.addListener('focus', () => {
       //  setLoader(true);  check in voozoo
 
-      dispatch(HomeAction.fetchHomeData('60caaf095abd5c7cc4735ee9'));
+      dispatch(HomeAction.fetchHomeData('60cba181b565373c8128e8e8'));
 
       setLoader(false);
     });
@@ -46,12 +46,13 @@ const Home = ({navigation}) => {
             }
           />
         }
-        footerComponent={<Advertisement />}
+        footerComponent={<Advertisement advertisementData={homeData?.offers} />}
         onPress={product =>
           navigation.navigate('MyProjectDetail', {
             product,
           })
         }
+        myProjectsData={homeData?.projects}
       />
     </View>
   );
