@@ -13,95 +13,67 @@ import {
 import color from '../../../style/color';
 import Header from './Header';
 import AppHeader from '../../../components/AppHeader';
-import SearchBar from '../../../components/SearchBar';
 import {SCREEN_HEIGHT, SCREEN_WIDTH} from '../../../style/fontSize';
-const DATA = [
-  {
-    id: '1',
-    title: 'RUSTY DRIVE',
-    image:
-      'https://res.cloudinary.com/demo/image/upload/w_260,h_200,c_crop,g_north/sample.jpg',
-  },
-  {
-    id: '2',
-    title: 'SABOR MORENO',
-    image:
-      'https://res.cloudinary.com/demo/image/upload/w_260,h_200,c_crop,g_north/sample.jpg',
-  },
-  {
-    id: '3',
-    title: '0 MESTRE PUB',
-    image:
-      'https://res.cloudinary.com/demo/image/upload/w_260,h_200,c_crop,g_north/sample.jpg',
-  },
-  {
-    id: '4',
-    title: 'GRILL 54 CHEF',
-    image:
-      'https://res.cloudinary.com/demo/image/upload/w_260,h_200,c_crop,g_north/sample.jpg',
-  },
-  {
-    id: '5',
-    title: 'RUSTY DRIVE',
-    image:
-      'https://res.cloudinary.com/demo/image/upload/w_260,h_200,c_crop,g_north/sample.jpg',
-  },
-  {
-    id: '6',
-    title: 'SABOR MORENO',
-    image:
-      'https://res.cloudinary.com/demo/image/upload/w_260,h_200,c_crop,g_north/sample.jpg',
-  },
-];
 
-const Offers = ({headercomponet, footerComponent, onPress}) => {
-  const _renderItem = ({item: service}) => (
-    <Pressable style={styles.offers} onPress={() => onPress(service.title)}>
+const Offers = ({headercomponet, offersData, onPress}) => {
+  const _renderItem = ({item: offer}) => (
+    <View style={styles.offers}>
       <Image
         style={styles.offersImgArea}
-        source={require('../../../assets/myoffer/youtube_ad.png')}
+        source={{uri: offer?.image?.publicUrl}}
       />
-      <Text style={styles.offerTitle}>Youtube Marketing</Text>
-      <Text style={styles.offerText}>
-        or a camera is one of the best tools for creating videos. ..
-      </Text>
+      <Text style={styles.offerTitle}>{offer.title}</Text>
+      <Text style={styles.offerText}>{offer?.description}</Text>
       <View style={styles.offerPriceArea}>
-        <Text style={styles.offerPrice}>
-          &#x24; 100{' '}
-          <Text style={{fontSize: 12, color: color.grey, textAlign: 'center'}}>
-            Discount &#x24; 100
-          </Text>
-        </Text>
+        <Text style={styles.offerPrice}>$ 100</Text>
+        <View
+          style={{
+            flexGrow: 1,
+            alignItems: 'flex-end',
+          }}>
+          <View style={{flexDirection: 'row'}}>
+            <Text style={{fontSize: 12, color: color.grey}}>Before </Text>
+            <Text
+              style={{
+                fontSize: 12,
+                color: color.grey,
+                textDecorationLine: 'line-through',
+              }}>
+              100
+            </Text>
+          </View>
+        </View>
       </View>
-    </Pressable>
+    </View>
   );
   return (
     <View style={styles.container}>
-      <AppHeader />
-      <View style={{padding: SCREEN_WIDTH * 0.01}}>
-        <Header
-          leftLabel="My Offers"
-          style={{marginHorizontal: SCREEN_WIDTH * 0.05}}
-        />
+      <AppHeader onPress={onPress} />
+      <View>
+        <View style={{marginTop: SCREEN_HEIGHT * 0.03}}>
+          <Header leftLabel="My Offers" />
+        </View>
+
         <View
           style={{
-            justifyContent: 'center',
-            alignItems: 'center',
             marginVertical: SCREEN_HEIGHT * 0.02,
           }}>
-          <Image
-            source={require('../../../assets/myoffer/myoffer.png')}
-            style={{height: SCREEN_HEIGHT * 0.15, width: SCREEN_WIDTH * 0.9}}
-          />
+          <View style={{width: '100%'}}>
+            <Image
+              source={require('../../../assets/myoffer/myoffer.png')}
+              style={{height: SCREEN_HEIGHT * 0.15, width: undefined}}
+            />
+          </View>
         </View>
 
         <FlatList
-          data={DATA}
+          data={offersData}
           renderItem={_renderItem}
-          keyExtractor={item => item.id}
+          keyExtractor={item => item._id}
           numColumns={2}
+          showsVerticalScrollIndicator={false}
           ListHeaderComponent={headercomponet}
-          ListFooterComponent={footerComponent}
+          ListFooterComponent={<View style={{height: SCREEN_HEIGHT * 0.5}} />}
         />
       </View>
     </View>
@@ -113,7 +85,6 @@ export default Offers;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginVertical: SCREEN_HEIGHT * 0.03,
   },
   offers: {
     backgroundColor: color.lightBlue,
@@ -145,9 +116,10 @@ const styles = StyleSheet.create({
     marginVertical: SCREEN_HEIGHT * 0.015,
   },
   offerPriceArea: {
+    flexDirection: 'row',
     backgroundColor: color.white,
     borderRadius: 4,
-    justifyContent: 'center',
+    //  justifyContent: 'center',
     alignItems: 'center',
     padding: SCREEN_HEIGHT * 0.01,
   },

@@ -12,17 +12,21 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import color from '../style/color';
-import File from '../screens/File/File';
 import Login from '../screens/Login';
 import Home from '../screens/Home';
 import {SCREEN_WIDTH, SCREEN_HEIGHT} from '../style/fontSize';
+import ProjectDetailContext from '../context/ProjectDetailContext';
 import Credentials from '../screens/Credentials';
 import Timeline from '../screens/MyProjectDetail/Timeline';
 import Chat from '../screens/MyProjectDetail/Chat';
 import PopularServiceDescription from '../screens/PopularServiceDescription';
 import Splash from '../screens/Splash';
+import MyOffers from '../screens/MyOffers';
+import Upload from '../screens/File/Upload';
+import Recieved from '../screens/File/Recieved';
 
 import SignUp from '../screens/SignUp/index';
+import AppHeader from '../components/AppHeader';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -53,19 +57,58 @@ const CustomTabButton = ({children, onPress}) => (
   </Pressable>
 );
 
-function MyProjectDetail() {
+function MyProjectDetail({route, navigation}) {
   return (
-    <TabTop.Navigator
-      initialRouteName="Feed"
-      tabBarOptions={{
-        activeTintColor: color.primary,
-        indicatorStyle: {backgroundColor: color.primary},
-        labelStyle: {fontSize: 12},
-        style: {backgroundColor: '#fff'},
-      }}>
-      <TabTop.Screen name="Home" component={Timeline} />
-      <TabTop.Screen name="Chat" component={Chat} />
-    </TabTop.Navigator>
+    <ProjectDetailContext.Provider value={route.params.product}>
+      <AppHeader
+        onPress={() => navigation.pop()}
+        style={{
+          backgroundColor: color.lightBlue,
+          padding: SCREEN_HEIGHT * 0.02,
+        }}
+      />
+      <TabTop.Navigator
+        initialRouteName="Feed"
+        tabBarOptions={{
+          activeTintColor: color.primary,
+          indicatorStyle: {
+            backgroundColor: color.lightBlue,
+            height: '100%',
+          },
+          labelStyle: {fontSize: SCREEN_HEIGHT * 0.018, fontWeight: 'bold'},
+          style: {backgroundColor: '#fff'},
+        }}>
+        <TabTop.Screen name="Home" component={Timeline} />
+        <TabTop.Screen name="Chat" component={Chat} />
+      </TabTop.Navigator>
+    </ProjectDetailContext.Provider>
+  );
+}
+
+function File({route}) {
+  return (
+    <View style={{flex: 1}}>
+      <AppHeader
+        style={{
+          backgroundColor: color.lightBlue,
+          padding: SCREEN_HEIGHT * 0.02,
+        }}
+      />
+      <TabTop.Navigator
+        initialRouteName="Upload"
+        tabBarOptions={{
+          activeTintColor: color.primary,
+          indicatorStyle: {
+            backgroundColor: color.lightBlue,
+            height: '100%',
+          },
+          labelStyle: {fontSize: SCREEN_HEIGHT * 0.018, fontWeight: 'bold'},
+          style: {backgroundColor: '#fff'},
+        }}>
+        <TabTop.Screen name="Upload" component={Upload} />
+        <TabTop.Screen name="Recieved" component={Recieved} />
+      </TabTop.Navigator>
+    </View>
   );
 }
 
@@ -77,6 +120,7 @@ function HomeStack() {
       }}>
       <Stack.Screen name="MainHome" component={Home} />
       <Stack.Screen name="MyProjectDetail" component={MyProjectDetail} />
+      <Stack.Screen name="MyOffers" component={MyOffers} />
       <Stack.Screen
         name="PopularServiceDescription"
         options={({route}) => ({title: route.params.screenTitle})}

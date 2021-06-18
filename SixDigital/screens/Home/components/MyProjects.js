@@ -36,12 +36,13 @@ const MyProjects = ({
           </Text>
           <View style={{flexDirection: 'row', marginTop: '2%'}}>
             <Text style={{color: color.purple, fontSize: 14, flex: 1}}>
-              Status : <Text style={{color: color.successText}}>Active</Text>
+              Status :{' '}
+              <Text style={{color: color.successText}}>{project?.status}</Text>
             </Text>
             <Text style={{color: color.grey, fontSize: 14}}>
               from{' '}
               <Text style={{color: color.purple, fontWeight: 'bold'}}>
-                &#x24; 100
+                &#x24; {project?.charges}
               </Text>
             </Text>
           </View>
@@ -68,14 +69,6 @@ export default MyProjects;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column',
-    marginTop: '5%',
-  },
-  logoText: {
-    color: color.purple,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    fontSize: 40,
   },
 
   proffesion: {
@@ -93,13 +86,13 @@ const styles = StyleSheet.create({
   },
   profTitle: {
     color: color.primary,
-    fontSize: 16,
+    fontSize: SCREEN_HEIGHT * 0.02,
     fontWeight: 'bold',
   },
   profDesc: {
     color: color.grey,
     marginTop: '2%',
-    fontSize: 14,
+    fontSize: SCREEN_HEIGHT * 0.017,
     textAlign: 'justify',
   },
 });

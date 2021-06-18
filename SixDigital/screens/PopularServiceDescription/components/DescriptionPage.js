@@ -8,34 +8,17 @@ import color from '../../../style/color';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
-const DescriptionPage = ({navigation, route, HeaderComponent}) => {
+const DescriptionPage = ({navigation, description, image}) => {
   return (
     <View style={styles.container}>
       <View style={styles.descArea}>
-        <View>
-          <Image
-            style={styles.descImg}
-            source={require('../../../assets/Fb-ad.jpg')}
-          />
+        <View style={{width: '100%'}}>
+          <Image style={styles.descImg} source={{uri: image}} />
         </View>
 
         <View style={styles.descDetail}>
           <ScrollView style={{height: SCREEN_HEIGHT * 0.4}}>
-            <Text style={styles.descDetailText}>
-              The official stated purpose of Facebook is to make the world more
-              open and connected. Facebook's latest mission statement is that
-              people use Facebook to stay connected with friends and family,
-              discover what's going on in the world to share and express what
-              matters to them. It majorly helps in generating leads, reaching
-              your target audience, builds brand loyalty,improves SEO and
-              increases web traffic The official stated purpose of Facebook is
-              to make the world more open and connected. Facebook's latest
-              mission statement is that people use Facebook to stay connected
-              with friends and family, discover what's going on in the world to
-              share and express what matters to them. It majorly helps in
-              generating leads, reaching your target audience, builds brand
-              loyalty,improves SEO and increases web traffic
-            </Text>
+            <Text style={styles.descDetailText}>{description}</Text>
           </ScrollView>
         </View>
 
@@ -59,21 +42,20 @@ const styles = StyleSheet.create({
   },
   descImg: {
     height: SCREEN_HEIGHT * 0.2,
-    width: SCREEN_HEIGHT * 0.45,
+    width: undefined,
     borderRadius: SCREEN_HEIGHT * 0.03,
   },
   descArea: {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: SCREEN_HEIGHT * 0.02,
+    marginTop: SCREEN_HEIGHT * 0.01,
   },
   descDetail: {
     backgroundColor: color.lightBlue,
     justifyContent: 'center',
     alignItems: 'center',
-    width: SCREEN_HEIGHT * 0.41,
-    // height: SCREEN_HEIGHT * 0.4,
+    width: SCREEN_WIDTH - 65,
     paddingHorizontal: SCREEN_HEIGHT * 0.04,
     paddingVertical: SCREEN_WIDTH * 0.02,
     borderBottomRightRadius: SCREEN_HEIGHT * 0.03,

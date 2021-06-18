@@ -39,14 +39,21 @@ const Home = ({navigation}) => {
                 style={{marginBottom: SCREEN_HEIGHT * 0.02}}
               />
             }
-            onPress={title =>
+            onPress={service =>
               navigation.navigate('PopularServiceDescription', {
-                title,
+                service,
               })
             }
           />
         }
-        footerComponent={<Advertisement advertisementData={homeData?.offers} />}
+        footerComponent={
+          <Advertisement
+            advertisementData={homeData?.offers}
+            onPressMyOfferSeeAll={advertisementData =>
+              navigation.navigate('MyOffers', {advertisementData})
+            }
+          />
+        }
         onPress={product =>
           navigation.navigate('MyProjectDetail', {
             product,

@@ -8,7 +8,7 @@ import globalStyles from '../../../../style/globalStyles';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
-const ProjectCard = ({navigation}) => {
+const ProjectCard = ({charges, name, status, image}) => {
   return (
     <View
       style={{
@@ -16,41 +16,47 @@ const ProjectCard = ({navigation}) => {
         backgroundColor: color.white,
         marginTop: SCREEN_HEIGHT * 0.001,
         padding: normalize(15),
-        marginBottom: 20,
+        marginBottom: SCREEN_HEIGHT * 0.03,
         alignItems: 'center',
         borderRadius: normalize(10),
         ...globalStyles.shadow,
       }}>
       <Image
         style={{height: SCREEN_HEIGHT * 0.1, width: SCREEN_HEIGHT * 0.1}}
-        source={require('../../../../assets/Fb-ad.jpg')}
+        source={{uri: image}}
       />
       <View
         style={{
-          // height: '50%',
-          // width: 1,
-          backgroundColor: color.lightGrey,
           marginHorizontal: SCREEN_WIDTH * 0.05,
         }}
       />
-      <View style={{flex: 0.8, marginVertical: SCREEN_HEIGHT * 0.02}}>
-        <Text style={{color: color.primary, fontSize: 14, fontWeight: 'bold'}}>
-          Video Shoot
+      <View style={{flex: 1, marginVertical: SCREEN_HEIGHT * 0.02}}>
+        <Text
+          style={{
+            color: color.primary,
+            fontSize: SCREEN_HEIGHT * 0.02,
+          }}>
+          {name}
         </Text>
         <Text
           style={{
             color: color.primary,
-            fontSize: 12,
+            fontSize: SCREEN_HEIGHT * 0.017,
             flex: 1,
             marginVertical: SCREEN_HEIGHT * 0.008,
           }}>
-          Status : <Text style={{color: color.successText}}>Active</Text>
+          Status : <Text style={{color: color.successText}}>{status}</Text>
         </Text>
       </View>
       <View style={{alignItems: 'center', justifyContent: 'center'}}>
-        <Text style={{color: color.primary, fontWeight: 'bold', fontSize: 16}}>
+        <Text
+          style={{
+            color: color.primary,
+            fontWeight: 'bold',
+            fontSize: SCREEN_HEIGHT * 0.02,
+          }}>
           {' '}
-          &#x24; 100
+          &#x24; {charges}
         </Text>
       </View>
     </View>

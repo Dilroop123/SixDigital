@@ -1,21 +1,15 @@
 import React from 'react';
 
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import {StyleSheet, View} from 'react-native';
+import {SCREEN_HEIGHT, SCREEN_WIDTH} from '../../style/fontSize';
 import color from '../../style/color';
-import Offers  from './components/Offers';
+import Offers from './components/Offers';
 
-const MyOffers = ({navigation}) => {
+const MyOffers = ({navigation, route}) => {
+  const {advertisementData} = route.params;
   return (
     <View style={styles.container}>
-      <Offers/>
+      <Offers offersData={advertisementData} onPress={() => navigation.pop()} />
     </View>
   );
 };
@@ -25,6 +19,7 @@ export default MyOffers;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:color.white
-  }
+    padding: SCREEN_WIDTH * 0.03,
+    backgroundColor: color.white,
+  },
 });

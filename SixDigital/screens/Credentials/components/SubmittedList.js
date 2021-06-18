@@ -133,6 +133,7 @@ const SubmittedList = ({navigation, route, HeaderComponent}) => {
         renderItem={renderItems}
         showsVerticalScrollIndicator={false}
         ListHeaderComponent={HeaderComponent}
+        ListFooterComponent={<View style={{height: SCREEN_HEIGHT * 0.3}} />}
       />
     </View>
   );

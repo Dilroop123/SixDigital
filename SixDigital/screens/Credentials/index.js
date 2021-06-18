@@ -55,7 +55,7 @@ const Credentials = ({navigation}) => {
       <SubmittedList
         HeaderComponent={
           <IconList
-            HeaderComponent={HeaderComponent}
+            HeaderComponent={<HeaderComponent />}
             onPress={title => onpressHandler(title)}
           />
         }

@@ -8,8 +8,9 @@ import globalStyles from '../../../style/globalStyles';
 import {FlatList} from 'react-native';
 import {Pressable} from 'react-native';
 import {SCREEN_WIDTH, SCREEN_HEIGHT} from '../../../style/fontSize';
+import Header from './Header';
 
-const Advertisement = ({advertisementData}) => {
+const Advertisement = ({advertisementData, onPressMyOfferSeeAll}) => {
   const _renderItem = ({item: service}) => (
     <Pressable
       style={{
@@ -79,6 +80,11 @@ const Advertisement = ({advertisementData}) => {
   );
   return (
     <View style={styles.container}>
+      <Header
+        leftLabel="My Offers"
+        rightLabel="See all"
+        onPress={() => onPressMyOfferSeeAll(advertisementData)}
+      />
       <FlatList
         data={advertisementData}
         renderItem={_renderItem}

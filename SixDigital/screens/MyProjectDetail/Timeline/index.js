@@ -5,12 +5,14 @@ import {StyleSheet, View} from 'react-native';
 import normalize from 'react-native-normalize';
 import TimelinePage from './components/TimelinePage';
 import AppHeader from '../../../components/AppHeader';
+import ProjectDetailContext from '../../../context/ProjectDetailContext';
 
 const Timeline = ({route}) => {
+  const projectDetail = React.useContext(ProjectDetailContext);
+
   return (
     <View style={styles.container}>
-      <AppHeader />
-      <TimelinePage />
+      <TimelinePage projectDetail={projectDetail} />
     </View>
   );
 };
