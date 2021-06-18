@@ -9,10 +9,12 @@ import ReduxThunk from 'redux-thunk';
 
 import userReducer from './store/reducers/UserReducer';
 import homeReducer from './store/reducers/HomeReducer';
+import fileReducer from './store/reducers/FileReducer';
 
 const rootReducer = combineReducers({
   user: userReducer,
   home: homeReducer,
+  file: fileReducer,
 });
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));

@@ -13,6 +13,7 @@ import color from '../../../../style/color';
 import normalize from 'react-native-normalize';
 import globalStyles from '../../../../style/globalStyles';
 import ProjectCard from './ProjectCard';
+import moment from 'moment';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
@@ -27,14 +28,16 @@ const TimelinePage = ({projectDetail}) => {
     setShowDescription(!showDescription);
   };
 
-  const renderItems = ({item, index}) => (
+  const renderItems = ({item: timeline, index}) => (
     <TouchableWithoutFeedback
       onPress={() => toggleVisiblity(index)}
       style={{flex: 1}}>
       <View style={{flex: 1}}>
         <View style={{flexDirection: 'row', flex: 1}}>
           <View>
-            <Text style={{width: SCREEN_WIDTH * 0.07}}>03 Jun</Text>
+            <Text style={{width: SCREEN_WIDTH * 0.07}}>
+              {moment(timeline.created_date).format('DD MMM')}
+            </Text>
           </View>
           <View style={{alignItems: 'center'}}>
             <View
@@ -71,7 +74,7 @@ const TimelinePage = ({projectDetail}) => {
                 fontWeight: 'bold',
                 fontSize: normalize(16),
               }}>
-              Test Title
+              {timeline.title}
             </Text>
             {!!showDescription && onPressPosition === index && (
               <View
@@ -83,7 +86,7 @@ const TimelinePage = ({projectDetail}) => {
                   padding: SCREEN_HEIGHT * 0.01,
                   marginRight: SCREEN_WIDTH * 0.02,
                 }}>
-                <Text>{item.description}</Text>
+                <Text>{timeline.description}</Text>
               </View>
             )}
           </View>
