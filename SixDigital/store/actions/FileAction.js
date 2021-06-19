@@ -26,15 +26,17 @@ export const sendFile = (user_id, image, name) => {
   };
 };
 
-export const getFiles = id => {
+export const getFiles = user_id => {
   return async dispatch => {
-    const response = await fetch(
-      `${baseUrl.url}api/v1/documents/?id=${encodeURIComponent(id)}`,
-      {
-        method: 'GET',
+    const response = await fetch(baseUrl.url + 'api/v1/documents/find', {
+      method: 'POST',
+      headers: {
         'Content-Type': 'application/json',
       },
-    );
+      body: JSON.stringify({
+        user_id,
+      }),
+    });
 
     const resData = await response.json();
 

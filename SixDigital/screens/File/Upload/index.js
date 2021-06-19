@@ -5,7 +5,6 @@ import {Dimensions, StyleSheet, Image, Text, View} from 'react-native';
 import DocumentPicker from 'react-native-document-picker';
 import {useDispatch, useSelector} from 'react-redux';
 import * as FileAction from '../../../store/actions/FileAction';
-import FileViewer from 'react-native-file-viewer';
 import Toast from '../../../components/Toast';
 import color from '../../../style/color';
 import Button from './Button';
@@ -34,7 +33,6 @@ const Upload = ({navigation}) => {
           'This is the test',
         ),
       );
-      await FileViewer.open(res.uri);
     } catch (err) {
       if (DocumentPicker.isCancel(err)) {
         // User cancelled the picker, exit any dialogs or menus and move on

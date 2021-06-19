@@ -15,10 +15,10 @@ import {
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import RNFS from 'react-native-fs';
-import FileViewer from 'react-native-file-viewer';
 import color from '../../../style/color';
 import globalStyles from '../../../style/globalStyles';
 import * as FileAction from '../../../store/actions/FileAction';
+import RNFetchBlob from 'rn-fetch-blob';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
@@ -36,42 +36,99 @@ const Recieved = ({navigation}) => {
   }, [dispatch, navigation]);
 
   const showDocument = async file => {
-    console.log('in function');
     if (Platform.OS === 'android') {
       const granted = await PermissionsAndroid.request(
         PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
       );
 
       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        const localFile = `${RNFS.DocumentDirectoryPath}/${file?.name}`;
-        const options = {
-          fromUrl: file?.image?.publicUrl,
-          toFile: file?.name,
+        const {dirs} = RNFetchBlob.fs;
+        const dirToSave =
+          Platform.OS === 'ios' ? dirs.DocumentDir : dirs.DownloadDir;
+        const configfb = {
+          fileCache: true,
+          addAndroidDownloads: {
+            path: dirToSave + '/' + file.image.name,
+            description: 'downloading file...',
+            notification: true,
+            // useDownloadManager works with Android only
+            useDownloadManager: true,
+          },
         };
-        RNFS.downloadFile(options)
-          .promise.then(() => FileViewer.open(localFile))
-          .then(() => {
-            // success
+        const configOptions = Platform.select({
+          ios: {
+            fileCache: configfb.fileCache,
+            title: configfb.title,
+            path: configfb.path,
+            appendExt: 'pdf',
+          },
+          android: configfb,
+        });
+
+        RNFetchBlob.config(configOptions)
+          .fetch('GET', file.image.publicUrl, {})
+          .then(res => {
+            if (Platform.OS === 'ios') {
+              RNFetchBlob.fs.writeFile(configfb.path, res.data, 'base64');
+              RNFetchBlob.ios.previewDocument(configfb.path);
+            }
+            if (Platform.OS === 'android') {
+              //TOAST ADDED TO NOTIFICATION PANEL
+
+              RNFetchBlob.android.actionViewIntent(
+                res.path(),
+                file?.image?.mimeType || 'application/pdf',
+              );
+            }
           })
-          .catch(error => {
-            // error
-          });
+          .catch(e => {});
       } else {
-        console.log('you denied');
+        // TOAST PERMISSION DENIED
       }
     } else {
-      const localFile = `${RNFS.DocumentDirectoryPath}/${file?.name}`;
-      const options = {
-        fromUrl: file?.image?.publicUrl,
-        toFile: file?.name,
+      const {dirs} = RNFetchBlob.fs;
+      const dirToSave =
+        Platform.OS === 'ios' ? dirs.DocumentDir : dirs.DownloadDir;
+      const configfb = {
+        fileCache: true,
+        addAndroidDownloads: {
+          path: dirToSave + '/' + file.image.name,
+          description: 'downloading file...',
+          notification: true,
+          // useDownloadManager works with Android only
+          useDownloadManager: true,
+        },
       };
-      RNFS.downloadFile(options)
-        .promise.then(() => FileViewer.open(localFile))
-        .then(() => {
-          // success
+      const configOptions = Platform.select({
+        ios: {
+          fileCache: configfb.fileCache,
+          title: configfb.title,
+          path: configfb.path,
+          appendExt: 'pdf',
+        },
+        android: configfb,
+      });
+
+      RNFetchBlob.config(configOptions)
+        .fetch('GET', file.image.publicUrl, {})
+        .then(res => {
+          if (Platform.OS === 'ios') {
+            RNFetchBlob.fs.writeFile(configfb.path, res.data, 'base64');
+            RNFetchBlob.ios.previewDocument(configfb.path);
+          }
+          if (Platform.OS === 'android') {
+            //showSnackbar('File downloaded');
+
+            RNFetchBlob.android.actionViewIntent(
+              res.path(),
+              file?.image?.mimeType || 'application/pdf',
+            );
+            console.log('File downloaded');
+          }
+          console.log('The file saved to ', res.data);
         })
-        .catch(error => {
-          // error
+        .catch(e => {
+          console.log('The file saved to ERROR', e.message);
         });
     }
   };
