@@ -91,13 +91,11 @@ const Recieved = ({navigation}) => {
         Platform.OS === 'ios' ? dirs.DocumentDir : dirs.DownloadDir;
       const configfb = {
         fileCache: true,
-        addAndroidDownloads: {
-          path: dirToSave + '/' + file.image.name,
-          description: 'downloading file...',
-          notification: true,
-          // useDownloadManager works with Android only
-          useDownloadManager: true,
-        },
+        useDownloadManager: true,
+        notification: true,
+        mediaScannable: true,
+        title: file.image.name,
+        path: `${dirToSave}/${file.image.name}`,
       };
       const configOptions = Platform.select({
         ios: {
