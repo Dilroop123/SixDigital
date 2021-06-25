@@ -12,7 +12,14 @@ const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SocialMediaModal = ({title, selectedIconId, setModalVisible}) => {
   const [email, setValue] = React.useState('');
   const [password, setPassword] = React.useState('');
-  const {userid} = getUserDetail();
+  const [userId, setUserId] = React.useState();
+  async function getUserId() {
+    setUserId(await getUserDetail());
+  }
+
+  React.useEffect(() => {
+    getUserId();
+  }, []);
   const dispatch = useDispatch();
 
   const onpressHandler = () => {
@@ -21,7 +28,7 @@ const SocialMediaModal = ({title, selectedIconId, setModalVisible}) => {
         title,
         email,
         password,
-        userid,
+        userId,
         selectedIconId,
       ),
     );

@@ -25,14 +25,21 @@ const Upload = ({navigation}) => {
   const [isShowToast, setIsShowToast] = React.useState(false);
   const fileDAta = useSelector(state => state.file.FileData);
   const dispatch = useDispatch();
-  const {userid} = getUserDetail();
+  const [userId, setUserId] = React.useState();
+  async function getUserId() {
+    setUserId(await getUserDetail());
+  }
+
+  React.useEffect(() => {
+    getUserId();
+  }, []);
   React.useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
       //  setLoader(true);  check in voozoo
 
-      dispatch(FileAction.getFiles(userid));
+      dispatch(FileAction.getFiles(userId));
     });
-  }, [dispatch, navigation, userid]);
+  }, [dispatch, navigation, userId]);
 
   const userUploaded = fileDAta?.data?.filter(
     file => file?.send_type === 'userUploaded',
@@ -49,9 +56,9 @@ const Upload = ({navigation}) => {
       setIsShowToast(true);
 
       await dispatch(
-        FileAction.sendFile(userid, res, 'This is the test', 'userUploaded'),
+        FileAction.sendFile(userId, res, 'This is the test', 'userUploaded'),
       );
-      await dispatch(FileAction.getFiles(userid));
+      await dispatch(FileAction.getFiles(userId));
     } catch (err) {
       if (DocumentPicker.isCancel(err)) {
         // User cancelled the picker, exit any dialogs or menus and move on

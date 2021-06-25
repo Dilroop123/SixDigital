@@ -20,15 +20,22 @@ const SCREEN_HEIGHT = Dimensions.get('window').height;
 const Invoice = ({route, navigation}) => {
   const fileDAta = useSelector(state => state.file.InvoiceData);
   const dispatch = useDispatch();
-  const {userid} = getUserDetail();
+  const [userId, setUserId] = React.useState();
+  async function getUserId() {
+    setUserId(await getUserDetail());
+  }
+
+  React.useEffect(() => {
+    getUserId();
+  }, []);
 
   React.useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
       //  setLoader(true);  check in voozoo
 
-      dispatch(FileAction.getInvoice(userid));
+      dispatch(FileAction.getInvoice(userId));
     });
-  }, [dispatch, navigation, userid]);
+  }, [dispatch, navigation, userId]);
 
   const _renderItem = ({item: document}) => <FileItem document={document} />;
 

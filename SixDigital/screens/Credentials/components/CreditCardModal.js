@@ -25,7 +25,14 @@ const CreditCardModal = ({title, selectedIconId, setModalVisible}) => {
   const [cvv, setCvv] = React.useState('');
 
   const dispatch = useDispatch();
-  const {userid} = getUserDetail();
+  const [userId, setUserId] = React.useState();
+  async function getUserId() {
+    setUserId(await getUserDetail());
+  }
+
+  React.useEffect(() => {
+    getUserId();
+  }, []);
   const onpressHandler = () => {
     dispatch(
       CreditActions.sendCreditCardCredentials(
@@ -38,7 +45,7 @@ const CreditCardModal = ({title, selectedIconId, setModalVisible}) => {
         cardNumber,
         expiry,
         cvv,
-        userid,
+        userId,
         selectedIconId,
       ),
     );
