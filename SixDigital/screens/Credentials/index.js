@@ -20,7 +20,16 @@ const Credentials = ({navigation}) => {
 
   const creditIconsData = useSelector(state => state.card.CreditCardIcons);
   const savedCrdentials = useSelector(state => state.card.SavedCrdentials);
-  const {userid} = getUserDetail();
+
+  const [userId, setUserId] = React.useState();
+  async function getUserId() {
+    setUserId(await getUserDetail());
+  }
+
+  React.useEffect(() => {
+    getUserId();
+  }, []);
+
   const dispatch = useDispatch();
   const onpressHandler = (title, cardId) => {
     setHeaderTitle(title);
@@ -31,9 +40,9 @@ const Credentials = ({navigation}) => {
   React.useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
       dispatch(CreditAction.getCreditIcons());
-      dispatch(CreditAction.getSavedCredentials(userid));
+      dispatch(CreditAction.getSavedCredentials(userId));
     });
-  }, [dispatch, navigation, userid]);
+  }, [dispatch, navigation, userId]);
 
   return (
     <View style={styles.container}>

@@ -14,20 +14,27 @@ import {getUserDetail} from '../../components/getUserDetail';
 const Home = ({navigation}) => {
   const dispatch = useDispatch();
   const homeData = useSelector(state => state.home.HomeData);
-
+  const [userId, setUserId] = React.useState();
   const [loader, setLoader] = React.useState(false);
 
-  const {userid} = getUserDetail();
+  // const {userid} = getUserDetail();
+  async function getUserId() {
+    setUserId(await getUserDetail());
+  }
+
+  React.useEffect(() => {
+    getUserId();
+  }, []);
 
   React.useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
       //  setLoader(true);  check in voozoo
 
-      dispatch(HomeAction.fetchHomeData(userid));
+      dispatch(HomeAction.fetchHomeData(userId));
 
       setLoader(false);
     });
-  }, [dispatch, navigation, userid]);
+  }, [dispatch, navigation, userId]);
 
   return (
     <View style={styles.container}>

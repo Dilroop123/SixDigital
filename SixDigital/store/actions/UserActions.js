@@ -1,5 +1,7 @@
 export const CREATE_USER = 'CREATE_USER';
 export const SIGNIN_USER = 'SIGNIN_USER';
+export const SAVE_USER_ID = 'SAVE_USER_ID';
+
 import baseUrl from '../../style/baseUrl';
 
 export const createUser = (first_name, last_name, email, phone, password) => {

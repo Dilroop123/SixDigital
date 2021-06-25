@@ -11,17 +11,18 @@ import {getUserDetail} from '../../../components/getUserDetail';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
-const DescriptionPage = ({
-  navigation,
-  description,
-  image,
-  serviceId,
-  navigateBack,
-}) => {
+const DescriptionPage = ({description, image, serviceId, navigateBack}) => {
   const dispatch = useDispatch();
-  const {userid} = getUserDetail();
+  const [userId, setUserId] = React.useState();
+  async function getUserId() {
+    setUserId(await getUserDetail());
+  }
+
+  React.useEffect(() => {
+    getUserId();
+  }, []);
   const onPressHandler = () => {
-    dispatch(HomeAction.createServiceRequest(serviceId, userid));
+    dispatch(HomeAction.createServiceRequest(serviceId, userId));
     navigateBack();
   };
   return (

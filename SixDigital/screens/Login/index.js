@@ -28,17 +28,46 @@ const Login = ({navigation}) => {
   const userData = useSelector(state => state.user.UserData);
   const dispatch = useDispatch();
 
-  React.useEffect(() => {
-    if (userData?.data?.email) {
-      try {
-        AsyncStorage.setItem('USER', userData?.data?._id);
-      } catch (e) {
-        // saving error
-      }
+  // React.useEffect(() => {
+  //   if (userData?.data?.email) {
+  //     try {
+  //       AsyncStorage.setItem('USER', userData?.data?._id);
+  //     } catch (e) {
+  //       // saving error
+  //     }
+  //     console.log('hhd');
+  //     // navigation.replace('HomeScreen');
+  //   }
+  // }, [userData, navigation]);
 
-      navigation.replace('HomeScreen');
+  // React.useEffect(() => {
+  //   const unsubscribe = navigation.addListener('focus', async () => {
+  //     if (userData?.data?.email) {
+  //       try {
+  //       } catch (e) {
+  //         // saving error
+  //       }
+
+  //       navigation.replace('HomeScreen');
+  //     }
+  //   });
+  // }, [navigation, userData]);
+
+  React.useEffect(() => {
+    async function fetchData() {
+      if (userData?.data?.email) {
+        console.log(userData?.data?._id);
+        try {
+          await AsyncStorage.setItem('USER', userData?.data?._id);
+        } catch (e) {
+          // saving error
+        }
+
+        navigation.replace('HomeScreen');
+      }
     }
-  }, [userData, navigation]);
+    fetchData();
+  }, [navigation, userData]);
 
   const onPressHandler = () => {
     dispatch(UserActions.loginUser(email, password));
