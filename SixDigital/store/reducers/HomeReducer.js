@@ -1,4 +1,4 @@
-import {SET_HOME} from '../actions/HomeAction';
+import {SET_HOME, CREATE_SERVICE_REQUEST} from '../actions/HomeAction';
 const initialState = {
   HomeData: [],
 };
@@ -9,6 +9,10 @@ export default (state = initialState, action) => {
       return {
         ...state,
         HomeData: action.homeData,
+      };
+    case CREATE_SERVICE_REQUEST:
+      return {
+        ...state,
       };
   }
   return state;

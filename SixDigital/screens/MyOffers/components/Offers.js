@@ -25,7 +25,7 @@ const Offers = ({headercomponet, offersData, onPress}) => {
       <Text style={styles.offerTitle}>{offer.title}</Text>
       <Text style={styles.offerText}>{offer?.description}</Text>
       <View style={styles.offerPriceArea}>
-        <Text style={styles.offerPrice}>$ 100</Text>
+        <Text style={styles.offerPrice}>$ {offer?.real_cost}</Text>
         <View
           style={{
             flexGrow: 1,
@@ -39,7 +39,7 @@ const Offers = ({headercomponet, offersData, onPress}) => {
                 color: color.grey,
                 textDecorationLine: 'line-through',
               }}>
-              100
+              {offer?.actual_cost}
             </Text>
           </View>
         </View>

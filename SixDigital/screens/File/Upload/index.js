@@ -1,21 +1,43 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 
-import {Dimensions, StyleSheet, Image, Text, View} from 'react-native';
+import {
+  Dimensions,
+  StyleSheet,
+  Image,
+  Text,
+  View,
+  FlatList,
+} from 'react-native';
 import DocumentPicker from 'react-native-document-picker';
 import {useDispatch, useSelector} from 'react-redux';
 import * as FileAction from '../../../store/actions/FileAction';
 import Toast from '../../../components/Toast';
 import color from '../../../style/color';
 import Button from './Button';
+import FileItem from '../component/FileItem';
+import {getUserDetail} from '../../../components/getUserDetail';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 const Upload = ({navigation}) => {
   const [isShowToast, setIsShowToast] = React.useState(false);
-
+  const fileDAta = useSelector(state => state.file.FileData);
   const dispatch = useDispatch();
+  const {userid} = getUserDetail();
+  React.useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      //  setLoader(true);  check in voozoo
+
+      dispatch(FileAction.getFiles(userid));
+    });
+  }, [dispatch, navigation, userid]);
+
+  const userUploaded = fileDAta?.data?.filter(
+    file => file?.send_type === 'userUploaded',
+  );
+
   const uploadDocument = async () => {
     // Pick a single file
     setIsShowToast(false);
@@ -27,12 +49,9 @@ const Upload = ({navigation}) => {
       setIsShowToast(true);
 
       await dispatch(
-        FileAction.sendFile(
-          '60cba181b565373c8128e8e8',
-          res,
-          'This is the test',
-        ),
+        FileAction.sendFile(userid, res, 'This is the test', 'userUploaded'),
       );
+      await dispatch(FileAction.getFiles(userid));
     } catch (err) {
       if (DocumentPicker.isCancel(err)) {
         // User cancelled the picker, exit any dialogs or menus and move on
@@ -41,6 +60,8 @@ const Upload = ({navigation}) => {
       }
     }
   };
+
+  const _renderItem = ({item: document}) => <FileItem document={document} />;
 
   return (
     <View style={styles.container}>
@@ -66,6 +87,14 @@ const Upload = ({navigation}) => {
           <Button onPress={uploadDocument} />
         </View>
       </View>
+      <FlatList
+        data={userUploaded}
+        renderItem={_renderItem}
+        showsVerticalScrollIndicator={false}
+        keyExtractor={item => item._id}
+        contentContainerStyle={{marginTop: SCREEN_HEIGHT * 0.05}}
+        ListFooterComponent={<View style={{height: SCREEN_HEIGHT * 0.3}} />}
+      />
     </View>
   );
 };

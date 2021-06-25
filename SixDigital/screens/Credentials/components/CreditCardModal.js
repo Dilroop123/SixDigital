@@ -1,31 +1,62 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {StyleSheet, View, Dimensions} from 'react-native';
-
+import {useDispatch} from 'react-redux';
 import normalize from 'react-native-normalize';
 import Button from '../../../components/Button';
 import TextField from '../../../components/TextField';
+import * as CreditActions from '../../../store/actions/CreditAction';
+import {getUserDetail} from '../../../components/getUserDetail';
+
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 const MARGIN_LEFT = SCREEN_WIDTH * 0.03;
 const MARGIN_VERTICAL = SCREEN_HEIGHT * 0.01;
 
-const CreditCardModal = ({navigation}) => {
-  const [value, setValue] = React.useState('');
+const CreditCardModal = ({title, selectedIconId, setModalVisible}) => {
+  const [clientName, setCLientName] = React.useState('');
+  const [fullAddress, setFullAddress] = React.useState('');
+  const [postalCode, setPostalCode] = React.useState('');
+  const [mobileNumber, setMobileNumber] = React.useState('');
+  const [holderName, setHolderName] = React.useState('');
+  const [cardNumber, setCardNumber] = React.useState('');
+  const [expiry, setExpiry] = React.useState('');
+  const [cvv, setCvv] = React.useState('');
+
+  const dispatch = useDispatch();
+  const {userid} = getUserDetail();
+  const onpressHandler = () => {
+    dispatch(
+      CreditActions.sendCreditCardCredentials(
+        title,
+        clientName,
+        fullAddress,
+        postalCode,
+        mobileNumber,
+        holderName,
+        cardNumber,
+        expiry,
+        cvv,
+        userid,
+        selectedIconId,
+      ),
+    );
+    setModalVisible(false);
+  };
   return (
     <View style={styles.container}>
       <View style={{flexDirection: 'row'}}>
         <TextField
-          value={value}
-          onChangeText={setValue}
+          value={clientName}
+          onChangeText={setCLientName}
           label="Client Name"
           flex={1}
         />
 
         <TextField
-          value={value}
-          onChangeText={setValue}
+          value={fullAddress}
+          onChangeText={setFullAddress}
           label="Full Address"
           flex={1}
           style={{marginLeft: MARGIN_LEFT}}
@@ -33,51 +64,51 @@ const CreditCardModal = ({navigation}) => {
       </View>
       <View style={{flexDirection: 'row', marginVertical: MARGIN_VERTICAL}}>
         <TextField
-          value={value}
-          onChangeText={setValue}
+          value={postalCode}
+          onChangeText={setPostalCode}
           label="Postal Code"
           flex={1}
         />
 
         <TextField
-          value={value}
-          onChangeText={setValue}
+          value={mobileNumber}
+          onChangeText={setMobileNumber}
           label="Mobile Number"
           flex={1}
           style={{marginLeft: MARGIN_LEFT}}
         />
       </View>
       <TextField
-        value={value}
-        onChangeText={setValue}
+        value={holderName}
+        onChangeText={setHolderName}
         label="Credit Card Holder Name"
         style={{marginVertical: MARGIN_VERTICAL}}
       />
 
       <TextField
-        value={value}
-        onChangeText={setValue}
+        value={cardNumber}
+        onChangeText={setCardNumber}
         label="Card Number"
         style={{marginVertical: MARGIN_VERTICAL}}
       />
       <View style={{flexDirection: 'row', marginVertical: MARGIN_VERTICAL}}>
         <TextField
-          value={value}
-          onChangeText={setValue}
+          value={expiry}
+          onChangeText={setExpiry}
           label="Expiry"
           flex={1}
         />
 
         <TextField
-          value={value}
-          onChangeText={setValue}
+          value={cvv}
+          onChangeText={setCvv}
           label="CVV"
           flex={1}
           style={{marginLeft: MARGIN_LEFT}}
         />
       </View>
       <View style={{marginTop: 15}}>
-        <Button />
+        <Button onPress={() => onpressHandler()} />
       </View>
     </View>
   );

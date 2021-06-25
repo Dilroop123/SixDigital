@@ -9,6 +9,7 @@ import Advertisement from './components/Advertisement';
 import {StyleSheet, View} from 'react-native';
 import Header from './components/Header';
 import {SCREEN_HEIGHT} from '../../style/fontSize';
+import {getUserDetail} from '../../components/getUserDetail';
 
 const Home = ({navigation}) => {
   const dispatch = useDispatch();
@@ -16,15 +17,17 @@ const Home = ({navigation}) => {
 
   const [loader, setLoader] = React.useState(false);
 
+  const {userid} = getUserDetail();
+
   React.useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
       //  setLoader(true);  check in voozoo
 
-      dispatch(HomeAction.fetchHomeData('60cba181b565373c8128e8e8'));
+      dispatch(HomeAction.fetchHomeData(userid));
 
       setLoader(false);
     });
-  }, [dispatch, navigation]);
+  }, [dispatch, navigation, userid]);
 
   return (
     <View style={styles.container}>

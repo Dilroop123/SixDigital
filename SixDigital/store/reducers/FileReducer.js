@@ -1,6 +1,7 @@
-import {SEND_FILE, SET_FILE} from '../actions/FileAction';
+import {SEND_FILE, SET_FILE, SET_INVOICE} from '../actions/FileAction';
 const initialState = {
   FileData: [],
+  InvoiceData: [],
 };
 
 export default (state = initialState, action) => {
@@ -13,6 +14,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         FileData: action.fileData,
+      };
+    case SET_INVOICE:
+      return {
+        ...state,
+        InvoiceData: action.invoiceData,
       };
   }
   return state;

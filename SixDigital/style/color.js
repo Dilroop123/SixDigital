@@ -1,7 +1,7 @@
 export default {
   primary: '#3E4095',
   lightGrey: '#F1F1F2',
-  darkGrey: '#BDBFC1',
+  darkGrey: 'gray',
   skyBlue: '#87ceeb',
   lightBlue: '#EEF2FA',
   purple: '#4e1f9d',

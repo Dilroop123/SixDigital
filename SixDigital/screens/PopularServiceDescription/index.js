@@ -18,6 +18,8 @@ const PopularServiceDescription = ({route, navigation}) => {
       </View>
       <DescriptionPage
         description={service?.description}
+        serviceId={service?._id}
+        navigateBack={() => navigation.pop()}
         image={service?.cover_image?.publicUrl}
       />
     </View>

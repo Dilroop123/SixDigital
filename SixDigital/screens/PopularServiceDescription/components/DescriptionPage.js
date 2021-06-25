@@ -3,12 +3,27 @@ import React from 'react';
 
 import {Button, StyleSheet, View, Text, Image, Dimensions} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
+import * as HomeAction from '../../../store/actions/HomeAction';
+import {useDispatch} from 'react-redux';
 import color from '../../../style/color';
+import {getUserDetail} from '../../../components/getUserDetail';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
-const DescriptionPage = ({navigation, description, image}) => {
+const DescriptionPage = ({
+  navigation,
+  description,
+  image,
+  serviceId,
+  navigateBack,
+}) => {
+  const dispatch = useDispatch();
+  const {userid} = getUserDetail();
+  const onPressHandler = () => {
+    dispatch(HomeAction.createServiceRequest(serviceId, userid));
+    navigateBack();
+  };
   return (
     <View style={styles.container}>
       <View style={styles.descArea}>
@@ -26,6 +41,7 @@ const DescriptionPage = ({navigation, description, image}) => {
           <Button
             title="Request Service"
             color={color.primary}
+            onPress={() => onPressHandler()}
             style={styles.descBtn}
           />
         </View>

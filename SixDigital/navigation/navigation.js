@@ -18,6 +18,8 @@ import {SCREEN_WIDTH, SCREEN_HEIGHT} from '../style/fontSize';
 import ProjectDetailContext from '../context/ProjectDetailContext';
 import Credentials from '../screens/Credentials';
 import Timeline from '../screens/MyProjectDetail/Timeline';
+import Invoice from '../screens/Invoice';
+
 import Chat from '../screens/MyProjectDetail/Chat';
 import PopularServiceDescription from '../screens/PopularServiceDescription';
 import Splash from '../screens/Splash';
@@ -217,7 +219,7 @@ function MyTabs() {
       />
       <Tab.Screen
         name="Invoices"
-        component={Credentials}
+        component={Invoice}
         options={{
           tabBarIcon: ({focused}) => (
             <View
@@ -281,9 +283,9 @@ export default function MianStack() {
       screenOptions={{
         headerShown: false,
       }}>
-      {/* <Stack.Screen name="Splash" component={Splash} />
+      <Stack.Screen name="Splash" component={Splash} />
       <Stack.Screen name="Login" component={Login} />
-      <Stack.Screen name="SignUp" component={SignUp} /> */}
+      <Stack.Screen name="SignUp" component={SignUp} />
       <Stack.Screen name="HomeScreen" component={MyTabs} />
     </Stack.Navigator>
   );

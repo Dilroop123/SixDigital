@@ -1,4 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
+
 import React from 'react';
 
 import {
@@ -12,6 +13,7 @@ import {
   Text,
   View,
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useDispatch, useSelector} from 'react-redux';
 import TextField from '../../components/TextField';
 import * as UserActions from '../../store/actions/UserActions';
@@ -28,6 +30,12 @@ const Login = ({navigation}) => {
 
   React.useEffect(() => {
     if (userData?.data?.email) {
+      try {
+        AsyncStorage.setItem('USER', userData?.data?._id);
+      } catch (e) {
+        // saving error
+      }
+
       navigation.replace('HomeScreen');
     }
   }, [userData, navigation]);

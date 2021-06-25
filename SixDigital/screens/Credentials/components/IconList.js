@@ -2,7 +2,6 @@
 import React from 'react';
 import {
   FlatList,
-  StyleSheet,
   Text,
   View,
   Image,
@@ -13,56 +12,9 @@ import color from '../../../style/color';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
-const IconList = ({navigation, route, HeaderComponent, onPress}) => {
-  const flatListData = [
-    {
-      key: '1',
-      title: 'Facebook',
-      icon: require('../../../assets/facebook.jpg'),
-    },
-    {
-      key: '2',
-      title: 'Facebook',
-      icon: require('../../../assets/facebook.jpg'),
-    },
-    {
-      key: '3',
-      title: 'Facebook',
-      icon: require('../../../assets/facebook.jpg'),
-    },
-    {
-      key: '4',
-      title: 'Facebook',
-      icon: require('../../../assets/facebook.jpg'),
-    },
-    {
-      key: '5',
-      title: 'Facebook',
-      icon: require('../../../assets/facebook.jpg'),
-    },
-    {
-      key: '6',
-      title: 'Facebook',
-      icon: require('../../../assets/facebook.jpg'),
-    },
-    {
-      key: '7',
-      title: 'Facebook',
-      icon: require('../../../assets/facebook.jpg'),
-    },
-    {
-      key: '8',
-      title: 'Facebook',
-      icon: require('../../../assets/facebook.jpg'),
-    },
-    {
-      key: '9',
-      title: 'creditCard',
-      icon: require('../../../assets/facebook.jpg'),
-    },
-  ];
+const IconList = ({creditIconsData, HeaderComponent, onPress}) => {
   const renderItems = ({item: icon}) => (
-    <TouchableWithoutFeedback onPress={() => onPress(icon.title)}>
+    <TouchableWithoutFeedback onPress={() => onPress(icon?.code, icon?._id)}>
       <View
         style={{
           flex: 1,
@@ -71,7 +23,7 @@ const IconList = ({navigation, route, HeaderComponent, onPress}) => {
         }}>
         <Image
           style={{height: SCREEN_HEIGHT * 0.1, width: SCREEN_HEIGHT * 0.1}}
-          source={icon.icon}
+          source={{uri: icon?.image?.publicUrl}}
         />
       </View>
     </TouchableWithoutFeedback>
@@ -81,8 +33,8 @@ const IconList = ({navigation, route, HeaderComponent, onPress}) => {
     <View>
       <FlatList
         numColumns={3}
-        data={flatListData}
-        keyExtractor={item => item.key}
+        data={creditIconsData}
+        keyExtractor={item => item._id}
         renderItem={renderItems}
         ListHeaderComponent={HeaderComponent}
         ListFooterComponent={

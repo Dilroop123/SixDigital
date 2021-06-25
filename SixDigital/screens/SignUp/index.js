@@ -36,7 +36,6 @@ const SignUp = ({navigation}) => {
 
       navigation.pop();
     } else {
-      console.log('password mismatches');
     }
   };
 

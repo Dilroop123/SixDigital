@@ -46,44 +46,7 @@ const Button = ({iconColor, icon}) => {
   );
 };
 
-const SubmittedList = ({navigation, route, HeaderComponent}) => {
-  const flatListData = [
-    {
-      key: '1',
-      title: 'xyz password',
-      email: 'dilroop@applauz.me',
-      password: '123456',
-      icon: require('../../../assets/facebook.jpg'),
-    },
-    {
-      key: '2',
-      title: 'xyz password',
-      email: 'dilroop@applauz.me',
-      password: '123456',
-      icon: require('../../../assets/facebook.jpg'),
-    },
-    {
-      key: '3',
-      title: 'xyz password',
-      email: 'dilroop@applauz.me',
-      password: '123456',
-      icon: require('../../../assets/facebook.jpg'),
-    },
-    {
-      key: '4',
-      title: 'xyz password',
-      email: 'dilroop@applauz.me',
-      password: '123456',
-      icon: require('../../../assets/facebook.jpg'),
-    },
-    {
-      key: '5',
-      title: 'xyz password',
-      email: 'dilroop@applauz.me',
-      password: '123456',
-      icon: require('../../../assets/facebook.jpg'),
-    },
-  ];
+const SubmittedList = ({savedCrdentials, HeaderComponent}) => {
   const renderItems = ({item: icon}) => (
     <TouchableWithoutFeedback>
       <View
@@ -100,7 +63,7 @@ const SubmittedList = ({navigation, route, HeaderComponent}) => {
         }}>
         <Image
           style={{height: SCREEN_HEIGHT * 0.05, width: SCREEN_HEIGHT * 0.05}}
-          source={icon.icon}
+          source={{uri: icon?.credential_type_id?.image?.publicUrl}}
         />
         <View
           style={{
@@ -111,9 +74,15 @@ const SubmittedList = ({navigation, route, HeaderComponent}) => {
           }}
         />
         <View style={{flex: 1}}>
-          <Label text="Title" value="xyz passowrd" />
-          <Label text="Email id" value="dilroop@applauz.me" />
-          <Label text="password" value="123456" />
+          <Label text="Title" value={icon?.title} />
+          {!!icon?.email && <Label text="Email id" value={icon?.email} />}
+          {!!icon?.password && <Label text="Password" value={icon?.password} />}
+          {!!icon?.card_holder_name && (
+            <Label text="Card Holder" value={icon?.card_holder_name} />
+          )}
+          {!!icon?.card_name && (
+            <Label text="Card Number" value={icon?.card_name} />
+          )}
         </View>
         <View style={{alignItems: 'flex-end', justifyContent: 'flex-end'}}>
           <Button iconColor="red" icon="delete-forever" />
@@ -128,8 +97,8 @@ const SubmittedList = ({navigation, route, HeaderComponent}) => {
   return (
     <View style={styles.container}>
       <FlatList
-        data={flatListData}
-        keyExtractor={item => item.key}
+        data={savedCrdentials}
+        keyExtractor={item => item._id}
         renderItem={renderItems}
         showsVerticalScrollIndicator={false}
         ListHeaderComponent={HeaderComponent}
