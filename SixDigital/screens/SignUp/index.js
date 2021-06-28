@@ -119,7 +119,7 @@ const SignUp = ({navigation}) => {
                   <Text
                     style={{
                       color: color.white,
-                      fontSize: 14,
+                      fontSize: SCREEN_HEIGHT * 0.015,
                       textAlign: 'center',
                     }}>
                     Signup
@@ -137,7 +137,7 @@ const SignUp = ({navigation}) => {
                   <Text
                     style={{
                       color: color.white,
-                      fontSize: 20,
+                      fontSize: SCREEN_HEIGHT * 0.02,
                       fontWeight: 'bold',
                     }}>
                     {' '}
@@ -179,9 +179,11 @@ const styles = StyleSheet.create({
   },
   signupBtn: {
     height: SCREEN_HEIGHT * 0.07,
-    width: SCREEN_WIDTH * 0.14,
+    width: SCREEN_HEIGHT * 0.07,
     backgroundColor: color.primary,
-    borderRadius: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: (SCREEN_HEIGHT * 0.07) / 2,
     borderColor: color.white,
     borderWidth: 2,
     marginLeft: SCREEN_WIDTH * 0.45,

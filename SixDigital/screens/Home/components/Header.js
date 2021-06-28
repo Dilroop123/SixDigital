@@ -23,7 +23,7 @@ const Header = ({leftLabel, rightLabel, style, onPress}) => {
       )}
       {!!rightLabel && (
         <TouchableOpacity
-          onPress={() => onPress()}
+          onPress={() => (onPress ? onPress() : undefined)}
           style={{flexGrow: 1, alignItems: 'flex-end'}}>
           <Text style={{color: color.grey, fontSize: 14}}>{rightLabel}</Text>
         </TouchableOpacity>

@@ -13,6 +13,7 @@ import {
   Text,
   View,
 } from 'react-native';
+import Toast from 'react-native-simple-toast';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useDispatch, useSelector} from 'react-redux';
 import TextField from '../../components/TextField';
@@ -28,35 +29,9 @@ const Login = ({navigation}) => {
   const userData = useSelector(state => state.user.UserData);
   const dispatch = useDispatch();
 
-  // React.useEffect(() => {
-  //   if (userData?.data?.email) {
-  //     try {
-  //       AsyncStorage.setItem('USER', userData?.data?._id);
-  //     } catch (e) {
-  //       // saving error
-  //     }
-  //     console.log('hhd');
-  //     // navigation.replace('HomeScreen');
-  //   }
-  // }, [userData, navigation]);
-
-  // React.useEffect(() => {
-  //   const unsubscribe = navigation.addListener('focus', async () => {
-  //     if (userData?.data?.email) {
-  //       try {
-  //       } catch (e) {
-  //         // saving error
-  //       }
-
-  //       navigation.replace('HomeScreen');
-  //     }
-  //   });
-  // }, [navigation, userData]);
-
   React.useEffect(() => {
     async function fetchData() {
       if (userData?.data?.email) {
-        console.log(userData?.data?._id);
         try {
           await AsyncStorage.setItem('USER', userData?.data?._id);
         } catch (e) {
@@ -64,6 +39,8 @@ const Login = ({navigation}) => {
         }
 
         navigation.replace('HomeScreen');
+      } else {
+        Toast.show(userData?.message, Toast.LONG);
       }
     }
     fetchData();
@@ -79,9 +56,6 @@ const Login = ({navigation}) => {
         style={{flex: 1, resizeMode: 'cover', justifyContent: 'center'}}
         source={require('../../assets/login/login_bg.png')}>
         <ScrollView>
-          <TouchableWithoutFeedback onPress={() => {}}>
-            <Text style={styles.skipTxt}>Skip</Text>
-          </TouchableWithoutFeedback>
           <View style={styles.loginContainer}>
             <View
               style={{

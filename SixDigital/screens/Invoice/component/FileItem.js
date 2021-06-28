@@ -13,6 +13,7 @@ import {
   PermissionsAndroid,
 } from 'react-native';
 import color from '../../../style/color';
+import Toast from 'react-native-simple-toast';
 import globalStyles from '../../../style/globalStyles';
 
 import RNFetchBlob from 'rn-fetch-blob';
@@ -117,10 +118,10 @@ const FileItem = ({document}) => {
             );
             console.log('File downloaded');
           }
-          console.log('The file saved to ', res.data);
+          Toast.show('File downloaded.', Toast.LONG);
         })
         .catch(e => {
-          console.log('The file saved to ERROR', e.message);
+          Toast.show(e.message, Toast.LONG);
         });
     }
   };

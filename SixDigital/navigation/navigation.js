@@ -26,6 +26,7 @@ import Splash from '../screens/Splash';
 import MyOffers from '../screens/MyOffers';
 import Upload from '../screens/File/Upload';
 import Recieved from '../screens/File/Recieved';
+import User from '../screens/User/Index';
 
 import SignUp from '../screens/SignUp/index';
 import AppHeader from '../components/AppHeader';
@@ -247,7 +248,7 @@ function MyTabs() {
       />
       <Tab.Screen
         name="User"
-        component={Credentials}
+        component={User}
         options={{
           tabBarIcon: ({focused}) => (
             <View

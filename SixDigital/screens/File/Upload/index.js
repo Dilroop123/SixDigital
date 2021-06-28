@@ -12,7 +12,7 @@ import {
 import DocumentPicker from 'react-native-document-picker';
 import {useDispatch, useSelector} from 'react-redux';
 import * as FileAction from '../../../store/actions/FileAction';
-import Toast from '../../../components/Toast';
+import Toast from 'react-native-simple-toast';
 import color from '../../../style/color';
 import Button from './Button';
 import FileItem from '../component/FileItem';
@@ -22,7 +22,6 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 const Upload = ({navigation}) => {
-  const [isShowToast, setIsShowToast] = React.useState(false);
   const fileDAta = useSelector(state => state.file.FileData);
   const dispatch = useDispatch();
   const [userId, setUserId] = React.useState();
@@ -47,13 +46,13 @@ const Upload = ({navigation}) => {
 
   const uploadDocument = async () => {
     // Pick a single file
-    setIsShowToast(false);
+
     try {
       const res = await DocumentPicker.pick({
         type: [DocumentPicker.types.allFiles],
       });
-      console.log(res.uri, res.type, res.name, res.size);
-      setIsShowToast(true);
+      // console.log(res.uri, res.type, res.name, res.size);
+      Toast.show('Upload Success');
 
       await dispatch(
         FileAction.sendFile(userId, res, 'This is the test', 'userUploaded'),
@@ -72,8 +71,6 @@ const Upload = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      {isShowToast && <Toast message="upload success" />}
-
       <Text style={{color: 'gray'}}>
         Upload your documents you want to share with us
       </Text>

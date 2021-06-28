@@ -84,12 +84,12 @@ const SubmittedList = ({savedCrdentials, HeaderComponent}) => {
             <Label text="Card Number" value={icon?.card_name} />
           )}
         </View>
-        <View style={{alignItems: 'flex-end', justifyContent: 'flex-end'}}>
+        {/* <View style={{alignItems: 'flex-end', justifyContent: 'flex-end'}}>
           <Button iconColor="red" icon="delete-forever" />
           <View style={{marginTop: SCREEN_HEIGHT * 0.01}}>
             <Button iconColor={color.skyBlue} icon="edit" />
           </View>
-        </View>
+        </View> */}
       </View>
     </TouchableWithoutFeedback>
   );
