@@ -4,6 +4,7 @@ export const CREATE_SERVICE_REQUEST = 'CREATE_SERVICE_REQUEST';
 import baseUrl from '../../style/baseUrl';
 
 export const fetchHomeData = user_id => {
+  console.log(user_id);
   return async dispatch => {
     const response = await fetch(baseUrl.url + 'api/v1/home', {
       method: 'POST',

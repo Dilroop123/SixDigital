@@ -27,7 +27,7 @@ import MyOffers from '../screens/MyOffers';
 import Upload from '../screens/File/Upload';
 import Recieved from '../screens/File/Recieved';
 import User from '../screens/User/Index';
-
+import InvoiceDetail from '../screens/InvoiceDetail';
 import SignUp from '../screens/SignUp/index';
 import AppHeader from '../components/AppHeader';
 
@@ -37,7 +37,7 @@ const TabTop = createMaterialTopTabNavigator();
 
 const MARGIN_TOP = SCREEN_HEIGHT * 0.02;
 const ICON_SIZE = SCREEN_HEIGHT * 0.03;
-const FONT_SIZE = normalize(16);
+const FONT_SIZE = SCREEN_HEIGHT * 0.016;
 
 const CustomTabButton = ({children, onPress}) => (
   <Pressable
@@ -73,7 +73,7 @@ function MyProjectDetail({route, navigation}) {
       <TabTop.Navigator
         initialRouteName="Feed"
         tabBarOptions={{
-          activeTintColor: color.primary,
+          activInvoiceeTintColor: color.primary,
           indicatorStyle: {
             backgroundColor: color.lightBlue,
             height: '100%',
@@ -129,6 +129,17 @@ function HomeStack() {
         options={({route}) => ({title: route.params.screenTitle})}
         component={PopularServiceDescription}
       />
+    </Stack.Navigator>
+  );
+}
+function InvoiceStack() {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}>
+      <Stack.Screen name="Invoice" component={Invoice} />
+      <Stack.Screen name="InvoiceDetail" component={InvoiceDetail} />
     </Stack.Navigator>
   );
 }
@@ -220,7 +231,7 @@ function MyTabs() {
       />
       <Tab.Screen
         name="Invoices"
-        component={Invoice}
+        component={InvoiceStack}
         options={{
           tabBarIcon: ({focused}) => (
             <View

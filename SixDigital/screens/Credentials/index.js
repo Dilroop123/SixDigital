@@ -38,11 +38,11 @@ const Credentials = ({navigation}) => {
   };
 
   React.useEffect(() => {
-    const unsubscribe = navigation.addListener('focus', () => {
-      dispatch(CreditAction.getCreditIcons());
+    dispatch(CreditAction.getCreditIcons());
+    if (userId) {
       dispatch(CreditAction.getSavedCredentials(userId));
-    });
-  }, [dispatch, navigation, userId]);
+    }
+  }, [userId, dispatch]);
 
   return (
     <View style={styles.container}>
